@@ -1,0 +1,6 @@
+[2025-03-31 22:31:45] INFO: 日志系统初始化完成，日志文件: C:/Users/admin/Desktop/ArtificialIntelligence/ted/logs\update_pdf_url_20250331_223145.log
+[2025-03-31 22:31:45] INFO: 配置文件检查完成
+[2025-03-31 22:31:45] INFO: 开始批量更新PDF URL
+[2025-03-31 22:32:04] WARNING: 无法解析行: 1. AditiGupta_2015X[阿迪提_古普塔][谈论生理期不再是禁忌].pdf
+[2025-03-31 22:32:04] ERROR: 解析文件错误: list index out of range
+[2025-03-31 22:32:04] WARNING: 没有找到有效记录

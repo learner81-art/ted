@@ -1,0 +1,5 @@
+修改脚本逻辑update_batch_pdfUrl.py，# 提取ID和文件名，格式如提取ID和文件名，格式如"2. 文件名: 2. 123.pdf" → 提取第一个数字2 作为匹配id，123.pdf作为更新的url，与ted.source.com 拼接为pdf_url, 同时文件不要硬编码，
+做成交互式的，log 打印出来
+
+
+logs 也要打印对应的sql 出来，便于查找问题

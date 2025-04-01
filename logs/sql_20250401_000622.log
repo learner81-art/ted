@@ -1,0 +1,54 @@
+2025-04-01 00:06:22,364 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:06:22,366 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE bio LIKE %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:06:22,366 - DEBUG - Where clause: WHERE bio LIKE %s
+2025-04-01 00:06:22,367 - DEBUG - Params: ['%Ϊʲô%']
+2025-04-01 00:06:22,367 - DEBUG - Sort type: english_asc
+2025-04-01 00:06:22,367 - DEBUG - Page: 1, Per page: 100
+2025-04-01 00:06:22,565 - DEBUG - Full SQL with parameters:
+
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE bio LIKE english_asc
+            ORDER BY 
+                CASE WHEN english_asc = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN english_asc = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN english_asc = 'year_asc' THEN year END ASC,
+                CASE WHEN %Ϊʲô% = 'year_desc' THEN year END DESC
+         LIMIT 100 OFFSET 0
+2025-04-01 00:06:50,926 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:06:50,929 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE year = %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:06:50,930 - DEBUG - Where clause: WHERE year = %s
+2025-04-01 00:06:50,930 - DEBUG - Params: ['2020']
+2025-04-01 00:06:50,930 - DEBUG - Sort type: english_asc
+2025-04-01 00:06:50,931 - DEBUG - Page: 1, Per page: 100
+2025-04-01 00:06:51,023 - DEBUG - Full SQL with parameters:
+
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE year = english_asc
+            ORDER BY 
+                CASE WHEN english_asc = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN english_asc = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN english_asc = 'year_asc' THEN year END ASC,
+                CASE WHEN 2020 = 'year_desc' THEN year END DESC
+         LIMIT 100 OFFSET 0

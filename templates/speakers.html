@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TED演讲者数据库</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #e62b1e; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .pdf-link {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        .pdf-link:hover {
+            color: #e62b1e;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex;">
+        <div style="width: 250px; padding-right: 20px;">
+            <h3>演讲者列表</h3>
+            <div style="max-height: 80vh; overflow-y: auto;">
+                {% for speaker in all_speakers %}
+                <div style="padding: 5px 0;">
+                    <a href="?english_name={{ speaker.english_name }}" 
+                       style="text-decoration: none; color: #0066cc;">
+                        {{ speaker.english_name }}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div style="flex: 1;">
+            <h1><a href="/" style="text-decoration: none; color: inherit;">TED演讲者数据库</a></h1>
+    <form method="get" action="/" style="margin-bottom: 20px;">
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <input type="text" name="english_name" placeholder="英文名..." 
+                   value="{{ request.args.get('english_name', '') }}"
+                   style="padding: 8px; width: 200px; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" name="chinese_name" placeholder="中文名..." 
+                   value="{{ request.args.get('chinese_name', '') }}"
+                   style="padding: 8px; width: 200px; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" name="year" placeholder="年份..." 
+                   value="{{ request.args.get('year', '') }}"
+                   style="padding: 8px; width: 200px; border: 1px solid #ddd; border-radius: 4px;">
+            <input type="text" name="bio" placeholder="简介..." 
+                   value="{{ request.args.get('bio', '') }}"
+                   style="padding: 8px; width: 200px; border: 1px solid #ddd; border-radius: 4px;">
+            <button type="submit" 
+                    style="padding: 8px 16px; background-color: #e62b1e; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                搜索
+            </button>
+        </div>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>
+                    <a href="?sort_type=english_name{% if current_sort == 'english_name_asc' %}_desc{% else %}_asc{% endif %}" 
+                       style="text-decoration: none; color: inherit;">
+                        英文名 {% if current_sort == 'english_name_asc' %}↑{% elif current_sort == 'english_name_desc' %}↓{% endif %}
+                    </a>
+                </th>
+                <th>中文名</th>
+                <th>
+                    <a href="?sort_type=year{% if current_sort == 'year_asc' %}_desc{% else %}_asc{% endif %}" 
+                       style="text-decoration: none; color: inherit;">
+                        年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
+                    </a>
+                </th>
+                <th>简介</th>
+            </tr>
+        </thead>
+        <tbody>
+    <!-- 添加调试信息 -->
+    <div style="color:red">
+        Speakers count: {{ speakers|length }}<br>
+        Query params: {{ query_params }}
+    </div>
+    {% for speaker in speakers %}
+            <tr>
+                <td>{{ (page-1)*per_page + loop.index }}</td>
+                <td>{{ speaker.english_name }}</td>
+                <td>{{ speaker.chinese_name }}</td>
+                <td>{{ speaker.year }}</td>
+                <td>
+                    {% if speaker.pdf_url %}
+                    <a href="{{ speaker.pdf_url }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
+                    {% else %}
+                    {{ speaker.bio }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="pagination" style="margin-top: 20px; text-align: center;">
+        {% if page > 1 %}
+            <a href="/page/1?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">首页</a>
+            <a href="/page/{{ page - 1 }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">&laquo; 上一页</a>
+        {% endif %}
+        
+        {% if page > 5 %}
+            <a href="/page/1?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">1</a>
+            <span style="padding: 8px 16px; margin: 0 4px;">...</span>
+        {% endif %}
+        
+        {% for p in range([1, page-2]|max, [page+3, total_pages+1]|min) %}
+            {% if p == page %}
+                <a class="active" href="#" style="padding: 8px 16px; margin: 0 4px; background-color: #e62b1e; color: white; text-decoration: none; border-radius: 5px;">{{ p }}</a>
+            {% else %}
+            <a href="/page/{{ p }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">{{ p }}</a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if page < total_pages - 4 %}
+            <span style="padding: 8px 16px; margin: 0 4px;">...</span>
+            <a href="/page/{{ total_pages }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">{{ total_pages }}</a>
+        {% endif %}
+        
+        {% if page < total_pages %}
+            <a href="/page/{{ page + 1 }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">下一页 &raquo;</a>
+            <a href="/page/{{ total_pages }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" style="padding: 8px 16px; margin: 0 4px; text-decoration: none; color: #e62b1e;">末页</a>
+        {% endif %}
+    </div>
+</body>
+</html>

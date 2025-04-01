@@ -1,0 +1,48 @@
+2025-03-31 23:44:48,667 - DEBUG - 
+=== SQL DEBUG ===
+2025-03-31 23:44:48,670 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE english_name LIKE %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-03-31 23:44:48,670 - DEBUG - Where clause: WHERE english_name LIKE %s
+2025-03-31 23:44:48,672 - DEBUG - Params: ['%AaronMorris%']
+2025-03-31 23:44:48,673 - DEBUG - Sort type: english_asc
+2025-03-31 23:44:48,673 - DEBUG - Page: 1, Per page: 100
+2025-03-31 23:44:53,233 - DEBUG - 
+=== SQL DEBUG ===
+2025-03-31 23:44:53,236 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-03-31 23:44:53,236 - DEBUG - Where clause: 
+2025-03-31 23:44:53,237 - DEBUG - Params: []
+2025-03-31 23:44:53,239 - DEBUG - Sort type: english_asc
+2025-03-31 23:44:53,239 - DEBUG - Page: 1, Per page: 100
+2025-03-31 23:44:59,413 - DEBUG - 
+=== SQL DEBUG ===
+2025-03-31 23:44:59,416 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE bio LIKE %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-03-31 23:44:59,417 - DEBUG - Where clause: WHERE bio LIKE %s
+2025-03-31 23:44:59,418 - DEBUG - Params: ['%ÃñÖ÷%']
+2025-03-31 23:44:59,420 - DEBUG - Sort type: english_asc
+2025-03-31 23:44:59,421 - DEBUG - Page: 1, Per page: 100

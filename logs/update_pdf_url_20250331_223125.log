@@ -1,0 +1,5 @@
+[2025-03-31 22:31:25] INFO: 日志系统初始化完成，日志文件: C:/Users/admin/Desktop/ArtificialIntelligence/ted/logs\update_pdf_url_20250331_223125.log
+[2025-03-31 22:31:25] INFO: 配置文件检查完成
+[2025-03-31 22:31:25] INFO: 开始批量更新PDF URL
+[2025-03-31 22:31:25] ERROR: 解析文件错误: list index out of range
+[2025-03-31 22:31:25] WARNING: 没有找到有效记录

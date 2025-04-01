@@ -1,0 +1,64 @@
+2025-04-01 00:00:21,697 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:00:21,699 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE year = %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:00:21,699 - DEBUG - Where clause: WHERE year = %s
+2025-04-01 00:00:21,701 - DEBUG - Params: ['2010']
+2025-04-01 00:00:21,701 - DEBUG - Sort type: english_asc
+2025-04-01 00:00:21,701 - DEBUG - Page: 3, Per page: 100
+2025-04-01 00:00:38,394 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:00:38,396 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE bio LIKE %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:00:38,397 - DEBUG - Where clause: WHERE bio LIKE %s
+2025-04-01 00:00:38,398 - DEBUG - Params: ['%Ů%']
+2025-04-01 00:00:38,399 - DEBUG - Sort type: english_asc
+2025-04-01 00:00:38,399 - DEBUG - Page: 1, Per page: 100
+2025-04-01 00:00:48,478 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:00:48,481 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE year = %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:00:48,481 - DEBUG - Where clause: WHERE year = %s
+2025-04-01 00:00:48,483 - DEBUG - Params: ['2010']
+2025-04-01 00:00:48,483 - DEBUG - Sort type: english_asc
+2025-04-01 00:00:48,483 - DEBUG - Page: 1, Per page: 100
+2025-04-01 00:01:49,423 - DEBUG - 
+=== SQL DEBUG ===
+2025-04-01 00:01:49,425 - DEBUG - Base query: 
+            SELECT id, english_name, chinese_name, bio, year, pdf_url
+            FROM speakers
+            WHERE year = %s
+            ORDER BY 
+                CASE WHEN %s = 'english_name_asc' THEN english_name END ASC,
+                CASE WHEN %s = 'english_name_desc' THEN english_name END DESC,
+                CASE WHEN %s = 'year_asc' THEN year END ASC,
+                CASE WHEN %s = 'year_desc' THEN year END DESC
+        
+2025-04-01 00:01:49,425 - DEBUG - Where clause: WHERE year = %s
+2025-04-01 00:01:49,427 - DEBUG - Params: ['2020']
+2025-04-01 00:01:49,427 - DEBUG - Sort type: english_asc
+2025-04-01 00:01:49,428 - DEBUG - Page: 1, Per page: 100
