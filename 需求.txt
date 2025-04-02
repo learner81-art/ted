@@ -1,5 +1,147 @@
+
+
+
+sk-393c0a2d35974157ad870f1e89c692c0
+
+C:\ProgramData\MySQL\MySQL Server 8.0
+
+
+C:\Users\admin\Desktop\ArtificialIntelligence\ted\test_single_pdf_from_db.py 解析没问题，就是有乱码，更改乱码，然后根据解析内容，设计数据表结构，我需要存储到数据库，同时规划详情页，如何呈现和展示，读取文本的到时候读这个ted_analysis_output - test.txt，而不是ted_analysis_output.txt
+
+
+解析没问题，就是有乱码，更改乱码，然后根据解析内容，设计数据表结构，我需要存储到数据库，同时规划详情页，如何呈现和展示
+
+
+
+
 修改脚本逻辑update_batch_pdfUrl.py，# 提取ID和文件名，格式如提取ID和文件名，格式如"2. 文件名: 2. 123.pdf" → 提取第一个数字2 作为匹配id，123.pdf作为更新的url，与ted.source.com 拼接为pdf_url, 同时文件不要硬编码，
 做成交互式的，log 打印出来
 
 
-logs 也要打印对应的sql 出来，便于查找问题
+logs 也要打印对应的sql 出来，便于查找问题test_single_pdf_from_db.py 
+
+
+后台启动flask 
+
+列表页新增一列，pdf浏览，同时简介的链接跳转到详情页 
+
+数据表已经插入 talks,根据这张表，将详情页展示出来，
+
+test_single_pdf_from_db.py 这个脚本无需硬编码，同时遍历ted_talks_db.speakers表中所有的pdf_url, 解析后全部存储入talks表中，批量执行
+
+编写代码，优化页面
+解析talks.content 字段
+包括演讲者信息，保持不变
+演讲内容概括，包括标题和内容摘要
+演讲具体内容，它是一段中文对应一段英文， 把中英文过滤出来，分别呈现，
+
+
+编写脚本，新增 content_display 字段，处理talks.content 字段的内容，要求是 一行中文对应一行英文，同时去掉不必要的空格和换行，可能的话，把繁体字转换成简体字，存储到content_display 字段，
+
+
+
+不是新增一列演讲详情，仍然是把链接加在简介上头，同时报错
+Database error: 1054 (42S22): Unknown column 't.content_display' in 'field list'
+
+
+列表页调整，演讲详情去掉，然后把链接加到 简介的文字上头
+详情页的话，之前test_single_pdf_from_db.py 解析pdf 的时候，能不能把pdf中的格式也一并存储
+
+
+列表页的链接，跳转到新标签，同时用户停在列表页不变
+pdf 解析包含格式，新增了一个字段 content_display ,根据演讲内容id 更新进去,支持断点更新，先更新第一条，看看效果
+
+
+
+content_display 字段没有内容，需要新增脚本，类似于C:\Users\admin\Desktop\ArtificialIntelligence\ted\test_single_pdf_from_db.py
+区别在于保留pdf格式，直接呈现出来，然后脚本根据id更新，支持断点更新，先更新一条看看数据呈现
+
+
+解析的时候，做如下处理，
+这两行删掉：
+www.XiYuSoft.com
+锡育软件
+
+下面的内容 是一行英文，一行中文，中文后带着中括号和数字，
+要求是一行 英文单词之间 去掉空格和换行等分隔符，中文也是做类似处理
+
+比如pdf中
+A
+phenomenon
+that is so
+significant
+that the
+survival
+and
+propagation
+of our
+species
+depends
+on it.
+这个现象如此重要 以至于全人类的生存和繁衍都要
+依赖于它。[00:32]
+
+修改后：
+
+A phenomenon that is so significant that the survival and propagation of our species depends on it.
+这个现象如此重要 以至于全人类的生存和繁衍都要依赖于它。[00:32]
+
+先更新一条数据
+
+
+进一步修改，
+
+第一个修改点：中英文之间需要换行，同时隔行换色
+修改之前：
+And since it is a taboo , teachers still skip the subject altogether . 而且正因为它是禁忌, 老师们一起仍然跳过这些内
+容。[06:49]
+So school does not teach girls about periods, parents don't talk about it. 所以学校不告诉女孩经期知识, 家长们也不谈论这
+些。[06:56]
+
+修改之后：
+And since it is a taboo , teachers still skip the subject altogether . 
+而且正因为它是禁忌, 老师们一起仍然跳过这些内容。[06:49]
+So school does not teach girls about periods, parents don't talk about it. 
+所以学校不告诉女孩经期知识, 家长们也不谈论这些。[06:56]
+
+
+第二个修改点：中英文之间只是换行，中间不要有空行
+修改之前：
+
+Where do the girls go?
+
+那些女孩怎么办呢？[07:03]
+
+修改之后：
+Where do the girls go?
+那些女孩怎么办呢？[07:03]
+
+
+
+进一步修改，一句英文和中文内部不要换行或断开，同时中文和英文之间需要换行，
+
+调整前：
+Girls nowadays get their periods in classes six and seven, but our educational
+curriculum teaches girls about periods only in standard eight and nine. 现在女孩子大多在六年级七年级开始来月经, 但是我 们的教育课程 在八,九年级的时候才正式的讲月经的
+知识。[06:38]
+
+调整后：
+Girls nowadays get their periods in classes six and seven, but our educational curriculum teaches girls about periods only in standard eight and nine. 
+现在女孩子大多在六年级七年级开始来月经, 但是我 们的教育课程 在八,九年级的时候才正式的讲月经的知识。[06:38]
+
+
+这个脚本插入数据 需要参数，指定id
+C:\Users\admin\Desktop\ArtificialIntelligence\ted\update_content_display.py 
+请插入后再启动网站 观看效果
+
+
+修改update 脚本的逻辑，不要解析pdf，直接读取content_字段的内容，更新到content_display 字段中去，
+评估一下，是不是内容太多，导致脚本处理过慢，一条数据半天都没刚更新成功
+
+
+主要修改点：
+注释PDF解析相关代码
+直接从数据库读取content字段
+根据原要求处理后存入content_display
+
+体积不变，不要修改。更改mysql配置

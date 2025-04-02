@@ -97,7 +97,7 @@ def insert_speakers(speakers):
 if __name__ == "__main__":
     # 获取用户输入的文件路径
     while True:
-        file_path = input("请输入包含演讲者数据的文本文件路径(例如: ted_analysis_output.txt): ").strip()
+        file_path = input("请输入包含演讲者数据的文本文件路径(例如: ted_analysis_output - test.txt): ").strip()
         # 处理路径中的反斜杠和空格
         file_path = file_path.replace('\\', '/').strip('"\'')
         try:

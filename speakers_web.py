@@ -172,5 +172,64 @@ def show_speakers(page=1):
             cursor.close()
             conn.close()
 
+@app.route('/talk_detail/<int:talk_id>')
+def talk_detail(talk_id):
+    if not talk_id:
+        return "Missing talk ID", 400
+    
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor(dictionary=True)
+        
+        # 查询演讲详情
+        query = """
+            SELECT 
+                s.english_name as speaker_name_en,
+                s.chinese_name as speaker_name_zh,
+                s.year,
+                s.pdf_url,
+                t.speaker_name_zh as title_zh,
+                t.content as content,
+                t.content_display,
+                t.page_count
+            FROM speakers s
+            JOIN talks t ON s.id = t.speaker_id
+            WHERE s.id = %s
+        """
+        cursor.execute(query, (talk_id,))
+        talk = cursor.fetchone()
+        
+        if not talk:
+            return "Talk not found", 404
+
+        # 解析中英文内容
+        content = talk['content']
+        chinese_parts = []
+        english_parts = []
+        
+        # 按行分割，奇数行中文，偶数行英文
+        lines = content.split('\n')
+        for i in range(0, len(lines), 2):
+            if i < len(lines):
+                chinese_parts.append(lines[i].strip())
+            if i+1 < len(lines):
+                english_parts.append(lines[i+1].strip())
+        
+        # 生成摘要（取前3行中文）
+        summary = '\n'.join(chinese_parts[:3]) if chinese_parts else "无内容摘要"
+        
+        return render_template('talk_detail.html', 
+                            talk=talk,
+                            chinese_parts=chinese_parts,
+                            english_parts=english_parts,
+                            summary=summary)
+        
+    except mysql.connector.Error as err:
+        return f"Database error: {err}", 500
+    finally:
+        if conn and conn.is_connected():
+            cursor.close()
+            conn.close()
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

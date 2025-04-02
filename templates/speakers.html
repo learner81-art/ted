@@ -86,6 +86,8 @@
                         年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
                     </a>
                 </th>
+                <th>PDF浏览</th>
+                <th>PDF内容预览</th>
                 <th>简介</th>
             </tr>
         </thead>
@@ -103,10 +105,22 @@
                 <td>{{ speaker.year }}</td>
                 <td>
                     {% if speaker.pdf_url %}
-                    <a href="{{ speaker.pdf_url }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
+                    <a href="{{ speaker.pdf_url }}" class="pdf-link" target="_blank">查看PDF</a>
                     {% else %}
-                    {{ speaker.bio }}
+                    无PDF
                     {% endif %}
+                </td>
+                <td>
+                    {% if speaker.content %}
+                    <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">
+                        {{ speaker.content|truncate(100) }}
+                    </a>
+                    {% else %}
+                    无内容
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
                 </td>
             </tr>
         {% endfor %}
