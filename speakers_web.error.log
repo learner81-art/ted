@@ -1,0 +1,524 @@
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.101.203:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [06/Apr/2025 21:25:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:25:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [06/Apr/2025 21:26:23] "GET / HTTP/1.1" 200 -
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.101.203:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [06/Apr/2025 21:26:52] "HEAD / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:27:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:27:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+127.0.0.1 - - [06/Apr/2025 21:27:45] "GET /?english_name=AbdallahEwis_ShajarAlDurr HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:27:48] "GET /?english_name=AdamSadowsky HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:27:54] "GET /?english_name=AbrahamVerghese HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:27:58] "GET /?english_name=AdamOckelford HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:02] "GET /?english_name=AjitNarayanan HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:07] "GET /?english_name=AlanSmith HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:12] "GET /?english_name=AlaindeBotton HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:37] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:49] "GET /?english_name=AaronOConnell HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [06/Apr/2025 21:28:56] "GET /talk_detail/256 HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:31:44] "[35m[1mGET /talk_detail/256 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 230, in talk_detail
+    if conn and conn.is_connected():
+UnboundLocalError: local variable 'conn' referenced before assignment
+127.0.0.1 - - [07/Apr/2025 17:31:44] "GET /talk_detail/256?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:31:44] "GET /talk_detail/256?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:31:44] "GET /talk_detail/256?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:32:03] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:32:09] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:32:15] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:33:29] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:34:57] "GET /talk_detail/256 HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 17:56:53] "[35m[1mGET /talk_detail/256 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 230, in talk_detail
+    if conn and conn.is_connected():
+UnboundLocalError: local variable 'conn' referenced before assignment
+127.0.0.1 - - [07/Apr/2025 17:56:53] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 17:56:53] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 17:56:53] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 17:56:57] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 17:57:39] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 18:23:39] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 18:23:42] "GET /talk_detail/256 HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:02:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:02:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:03:08] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:03:28] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:15:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:16:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:16:15] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:17:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:17:54] "GET / HTTP/1.1" 200 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:19:00] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:31:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:31:47] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:33:42] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:33:44] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:37:04] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 19:37:07] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 19:48:42] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:05:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:05:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:06:19] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:06:20] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:08:02] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:08:05] "GET / HTTP/1.1" 200 -
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:08:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:08:49] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:15:33] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:15:35] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:15:40] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:18:31] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/docker_db_config.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/test_db_connection.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [07/Apr/2025 20:44:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [07/Apr/2025 20:44:38] "[35m[1mGET /talk_detail/256 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 259, in talk_detail
+    conn = mysql.connector.connect(**db_config)
+TypeError: mysql.connector.pooling.connect() argument after ** must be a mapping, not NoneType
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 308, in talk_detail
+    if conn and conn.is_connected():
+UnboundLocalError: local variable 'conn' referenced before assignment
+127.0.0.1 - - [07/Apr/2025 20:44:38] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 20:44:38] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 20:44:38] "[36mGET /talk_detail/256?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+127.0.0.1 - - [07/Apr/2025 20:44:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 16:19:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 18:09:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 18:16:26] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 18:42:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:32:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:33:02] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:42:43] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:42:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:44:25] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:44:38] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:45:46] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:46:00] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:46:54] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:46:56] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:47:13] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:48:05] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:50:29] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:51:17] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:51:51] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:51:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:53:05] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:54:16] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:54:18] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:56:44] "GET / HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 19:57:49] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:57:56] "[35m[1mGET /talk_detail/3524 HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 320, in talk_detail
+    conn = mysql.connector.connect(**db_config)
+TypeError: mysql.connector.pooling.connect() argument after ** must be a mapping, not NoneType
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1536, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1514, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/a/Library/Python/3.9/lib/python/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 369, in talk_detail
+    if conn and conn.is_connected():
+UnboundLocalError: local variable 'conn' referenced before assignment
+127.0.0.1 - - [08/Apr/2025 19:57:56] "GET /talk_detail/3524?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:57:56] "GET /talk_detail/3524?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 19:57:56] "GET /talk_detail/3524?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 9
+    'host': '192.168.3.205',UnboundLocalError: local variable 'conn' referenced before assignment
+                                                     ^
+SyntaxError: invalid syntax
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/Apr/2025 20:00:20] "GET /talk_detail/3524 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:00:44] "GET /?sort_type=english_name_asc HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:00:45] "GET /?sort_type=english_name_asc HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:00:47] "GET /talk_detail/3525 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:00:56] "GET /talk_detail/3525 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:01:09] "GET /talk_detail/3522 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:01:30] "GET /page/3?sort_type=english_name_desc HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:01:34] "GET /page/36?sort_type=english_name_desc HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:01:43] "GET /page/1?sort_type=english_name_desc HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:02:01] "GET /talk_detail/3525 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:02:26] "GET /talk_detail/3525 HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:02:43] "GET /page/1?english_name=AbdallahEwis_ShajarAlDurr HTTP/1.1" 200 -
+127.0.0.1 - - [08/Apr/2025 20:02:51] "GET /?english_name=&chinese_name=%09苏百妲&year=&bio= HTTP/1.1" 200 -

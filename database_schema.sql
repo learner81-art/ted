@@ -10,6 +10,5 @@ CREATE TABLE IF NOT EXISTS talks (
     page_count INT COMMENT 'PDF页数',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_speaker (speaker_id),
-    FOREIGN KEY (speaker_id) REFERENCES speakers(id) ON DELETE CASCADE
+    INDEX idx_speaker (speaker_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
