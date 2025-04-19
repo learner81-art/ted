@@ -197,16 +197,28 @@ def show_speakers(page=1):
             
         # 日志配置
         import logging
+        from logging.handlers import RotatingFileHandler
         from datetime import datetime
         
         # 创建日志记录器
         logger = logging.getLogger('sql_logger')
         logger.setLevel(logging.DEBUG)
         
-        # 创建文件处理器
-        log_file = f"logs/sql_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
-        file_handler = logging.FileHandler(log_file)
+        # 添加过滤器排除SELECT语句
+        class ExcludeSelectFilter(logging.Filter):
+            def filter(self, record):
+                return 'SELECT' not in record.getMessage()
+        
+        # 创建轮转文件处理器(最大1MB，保留3个备份)
+        log_file = f"logs/sql.log"
+        file_handler = logging.handlers.RotatingFileHandler(
+            log_file,
+            maxBytes=1024*1024,  # 1MB
+            backupCount=3,
+            encoding='utf-8'
+        )
         file_handler.setLevel(logging.DEBUG)
+        file_handler.addFilter(ExcludeSelectFilter())
         
         # 创建格式化器
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -560,13 +572,15 @@ def talk_detail(talk_id):
                     print("Elasticsearch连接失败")
                 else:
                     # 使用requests直接查询Elasticsearch
-                    url = f"{ES_HOST}/{ES_INDEX}/_doc/{doc_id}?_source=chinese_content"
+                    url = f"{ES_HOST}/{ES_INDEX}/_doc/{doc_id}?_source=chinese_content,english_content"
                     resp = requests.get(url, timeout=10)
                     if resp.status_code == 200:
                         data = resp.json()
                         chinese_content = data.get('_source', {}).get('chinese_content', '')
+                        english_content = data.get('_source', {}).get('english_content', '')
                     else:
                         chinese_content = ''
+                        english_content = ''
             except Exception as e:
                 print(f"Elasticsearch查询错误: {e}")
                 # 确保即使ES失败也返回正常响应
@@ -603,6 +617,3 @@ def talk_detail(talk_id):
         if conn and conn.is_connected():
             cursor.close()
             conn.close()
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5050, debug=True)

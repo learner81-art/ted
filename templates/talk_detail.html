@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TED演讲详情 - {{ talk.title_zh }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --ted-red: #E62B1E;
+            --ted-dark: #1A1A1A;
+            --section-spacing: 2rem;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: var(--ted-dark);
+            padding-bottom: 3rem;
+        }
+        .header-card {
+            border-left: 5px solid var(--ted-red);
+            border-radius: 0;
+        }
+        .pdf-btn {
+            background-color: var(--ted-red);
+            color: white;
+            transition: all 0.3s;
+            margin-top: var(--section-spacing);
+        }
+        .pdf-btn:hover {
+            background-color: #c8231a;
+            transform: translateY(-2px);
+        }
+        .content-card {
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .talk-content {
+            line-height: 2;
+            font-size: 1.1rem;
+            margin-top: var(--section-spacing);
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .page-nav {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .speaker-section {
+            margin: var(--section-spacing) 0;
+            padding-bottom: var(--section-spacing);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .summary-section {
+            margin: var(--section-spacing) 0;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 0.5rem;
+        }
+        .summary-section p {
+            white-space: pre-line;
+        }
+        h1 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        h4.text-muted {
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <!-- 标题区域 -->
+        {% if title %}
+        <div class="mb-4">
+            <h3 class="mb-1">{{ title.split('|')[1]|trim }}</h3>
+            <h4 class="text-muted">{{ (title.split('|')[0]|trim if '|' in title else '')|replace('"', '') }}</h4>
+        </div>
+        {% endif %}
+
+        <!-- 演讲者信息 -->
+        {% if speaker %}
+        <div class="speaker-section mb-4">
+            <h4 class="text-muted">
+                {{ speaker.split('|')[0]|trim }} | {{ speaker.split('|')[1]|trim if '|' in speaker else '' }}
+            </h4>
+        </div>
+        {% endif %}
+
+        <!-- PDF信息和下载按钮 -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex gap-3">
+                <span class="badge bg-light text-dark">年份: {{ talk.year }}</span>
+                <span class="badge bg-light text-dark">页数: {{ talk.page_count }}</span>
+            </div>
+            <a href="{{ talk.pdf_url }}" class="btn btn-sm pdf-btn" target="_blank">
+                <i class="fas fa-file-pdf me-2"></i>下载PDF
+            </a>
+        </div>
+
+        <!-- 演讲内容区域 -->
+        <div class="row">
+            <div class="col-12">
+          
+                <!-- 内容概要 -->
+{% if talk.content %}
+<div class="summary-section mb-4 p-4">
+    <h5 class="text-muted mb-3">内容概要</h5>
+    <p class="mb-0">{{ content.replace('"', '') }}</p>
+</div>
+{% endif %}
+                <!-- 演讲内容 -->
+                <!-- {% if detail %}
+                <div class="talk-content mt-4">
+                    {{ detail }}
+                </div>
+                {% endif %} -->
+
+                {% if talk.eng_content %}
+                <div class="talk-content mt-3">
+                    <h4>English Content</h4>
+                    {{ talk.eng_content}}
+                </div>
+                {% endif %}
+
+                <!-- 中文内容编辑区域 -->
+                <div class="talk-content mt-4">
+                    <h4>中文内容</h4>
+                    <form id="chineseContentForm">
+                        <input type="hidden" name="talk_id" value="{{ talk.id }}">
+                        <div class="mb-3">
+                            <textarea class="form-control" name="chinese_content" rows="5" 
+                                placeholder="请输入中文内容...">{% if talk.chinese_content %}{{ talk.chinese_content }}{% endif %}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">更新中文内容</button>
+                    </form>
+                </div>
+
+                <script>
+                // 处理中文内容提交
+                document.getElementById('chineseContentForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    
+                    fetch('/update_chinese_content', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('中文内容更新成功');
+                        } else {
+                            alert('更新失败: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('请求失败');
+                    });
+                });
+                </script>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // 处理内容概要部分
+    document.addEventListener('DOMContentLoaded', function() {
+        const summaryElement = document.querySelector('.summary-section p');
+        if (summaryElement) {
+            let content = summaryElement.textContent;
+            // 去掉引号
+            content = content.replace(/"/g, '');
+            // 处理中文部分(去掉所有空格和换行)
+            content = content.replace(/[\u4e00-\u9fa5][\s\r\n]+[\u4e00-\u9fa5]/g, 
+                match => match.replace(/[\s\r\n]+/g, ''));
+            // 处理英文部分(多个空格和换行变单个空格)
+            content = content.replace(/[^\u4e00-\u9fa5][\s\r\n]+[^\u4e00-\u9fa5]/g, 
+                match => match.replace(/[\s\r\n]+/g, ' '));
+            summaryElement.textContent = content;
+        }
+    });
+    </script>
+</body>
+</html>

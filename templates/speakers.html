@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TED演讲者数据库</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #e62b1e; }
+        
+        /* 搜索建议样式 */
+        .suggestions-container {
+            position: relative;
+            width: 100%;
+        }
+        .suggestions-list {
+            position: absolute;
+            z-index: 1000;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 0 0 4px 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .suggestion-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+        }
+        .suggestion-item:hover {
+            background-color: #f5f5f5;
+        }
+        .suggestion-item.highlighted {
+            background-color: #e62b1e;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .pdf-link {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        .pdf-link:hover {
+            color: #e62b1e;
+        }
+    </style>
+</head>
+<body>
+    <div>
+            <h1><a href="/" style="text-decoration: none; color: inherit;">TED演讲者数据库</a></h1>
+    <form method="get" action="/" style="margin-bottom: 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+            <div>
+                <label for="search_term" style="display: block; margin-bottom: 5px; font-weight: bold;">标题</label>
+        <div class="suggestions-container">
+            <input type="text" id="search_term" name="search_term" placeholder="输入任意关键词..." 
+                   value="{{ request.args.get('search_term', '') }}"
+                   style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+                   autocomplete="off">
+            <div class="suggestions-list" id="suggestions"></div>
+        </div>
+            </div>
+            <div>
+                <label for="english_name" style="display: block; margin-bottom: 5px; font-weight: bold;">英文名</label>
+                <div class="suggestions-container">
+                    <input type="text" id="english_name" name="english_name" placeholder="输入英文名..." 
+                           value="{{ request.args.get('english_name', '') }}"
+                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+                           autocomplete="off">
+                    <div class="suggestions-list" id="english_name_suggestions"></div>
+                </div>
+            </div>
+            <div>
+                <label for="chinese_name" style="display: block; margin-bottom: 5px; font-weight: bold;">中文名</label>
+                <div class="suggestions-container">
+                    <input type="text" id="chinese_name" name="chinese_name" placeholder="输入中文名..." 
+                           value="{{ request.args.get('chinese_name', '') }}"
+                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+                           autocomplete="off">
+                    <div class="suggestions-list" id="chinese_name_suggestions"></div>
+                </div>
+            </div>
+            <div>
+                <label for="year" style="display: block; margin-bottom: 5px; font-weight: bold;">年份</label>
+                <input type="text" id="year" name="year" placeholder="输入年份..." 
+                       value="{{ request.args.get('year', '') }}"
+                       style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
+            <!-- <div>
+                <label for="bio" style="display: block; margin-bottom: 5px; font-weight: bold;">简介</label>
+                <div class="suggestions-container">
+                    <input type="text" id="bio" name="bio" placeholder="输入简介关键词..." 
+                           value="{{ request.args.get('bio', '') }}"
+                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
+                           autocomplete="off">
+                    <div class="suggestions-list" id="bio_suggestions"></div>
+                </div>
+            </div> -->
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 15px; align-items: center;">
+                {% if speakers %}
+                <div style="color: #666; font-size: 14px; background: #f5f5f5; padding: 8px 12px; border-radius: 4px;">
+                    找到 {{ speakers|length }} 条结果
+                </div>
+                {% endif %}
+            </div>
+            <div>
+                <button type="submit" 
+                        style="padding: 8px 16px; background-color: #e62b1e; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+                    搜索
+                </button>
+                <button type="button" onclick="window.location.href='/'" 
+                        style="padding: 8px 16px; margin-left: 10px; background-color: #f5f5f5; color: #666; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">
+                    重置
+                </button>
+            </div>
+        </div>
+    </form>
+    {% if debug_sql %}
+    <div style="margin-bottom: 20px; background: #f8f8f8; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">
+        <h3 style="margin-top: 0; cursor: pointer;" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none'">
+            SQL调试信息 ▼
+        </h3>
+        <pre style="display: none; margin: 0; font-family: monospace; white-space: pre-wrap; background: #f5f5f5; padding: 10px; border-radius: 3px; border: 1px solid #eee;">{{ debug_sql }}</pre>
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>
+                    <a href="?sort_type=english_name{% if current_sort == 'english_name_asc' %}_desc{% else %}_asc{% endif %}" 
+                       style="text-decoration: none; color: inherit;">
+                        英文名 {% if current_sort == 'english_name_asc' %}↑{% elif current_sort == 'english_name_desc' %}↓{% endif %}
+                    </a>
+                </th>
+                <th>中文名</th>
+                <th>
+                    <a href="?sort_type=year{% if current_sort == 'year_asc' %}_desc{% else %}_asc{% endif %}" 
+                       style="text-decoration: none; color: inherit;">
+                        年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
+                    </a>
+                </th>
+                <th>标题</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for speaker in speakers %}
+            <tr>
+                <td>{{ (page-1)*per_page + loop.index }}</td>
+                <td>{{ speaker.english_name }}</td>
+                <td>{{ speaker.chinese_name }}</td>
+                <td>{{ speaker.year }}</td>
+                <td>
+                    <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="pagination" style="margin-top: 30px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 5px;">
+        {% if page > 1 %}
+            <a href="/page/1?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                首页
+            </a>
+            <a href="/page/{{ page - 1 }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                &laquo; 上一页
+            </a>
+        {% endif %}
+        
+        {% if page > 5 %}
+            <a href="/page/1?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                1
+            </a>
+            <span style="padding: 8px 12px;">...</span>
+        {% endif %}
+        
+        {% for p in range([1, page-2]|max, [page+3, total_pages+1]|min) %}
+            {% if p == page %}
+                <span style="padding: 8px 12px; border: 1px solid #e62b1e; border-radius: 4px; background-color: #e62b1e; color: white;">{{ p }}</span>
+            {% else %}
+                <a href="/page/{{ p }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+                   style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                    {{ p }}
+                </a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if page < total_pages - 4 %}
+            <span style="padding: 8px 12px;">...</span>
+            <a href="/page/{{ total_pages }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                {{ total_pages }}
+            </a>
+        {% endif %}
+        
+        {% if page < total_pages %}
+            <a href="/page/{{ page + 1 }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                下一页 &raquo;
+            </a>
+            <a href="/page/{{ total_pages }}?{% if query_params.english_name %}english_name={{ query_params.english_name }}{% endif %}{% if query_params.chinese_name %}{% if query_params.english_name %}&{% endif %}chinese_name={{ query_params.chinese_name }}{% endif %}{% if query_params.year %}{% if query_params.english_name or query_params.chinese_name %}&{% endif %}year={{ query_params.year }}{% endif %}{% if query_params.bio %}{% if query_params.english_name or query_params.chinese_name or query_params.year %}&{% endif %}bio={{ query_params.bio }}{% endif %}{% if current_sort %}{% if query_params.english_name or query_params.chinese_name or query_params.year or query_params.bio %}&{% endif %}sort_type={{ current_sort }}{% endif %}" 
+               style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; text-decoration: none; color: #333; background: #f5f5f5;">
+                末页
+            </a>
+        {% endif %}
+    </div>
+    <!-- 引入jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    // 检查jQuery是否加载
+    if (typeof jQuery == 'undefined') {
+        console.error('jQuery未加载');
+    } else {
+        console.log('jQuery版本:', jQuery.fn.jquery);
+    }
+    $(document).ready(function() {
+        // 初始化所有输入框的建议功能
+        const inputFields = {
+            search_term: $('#search_term'),
+            english_name: $('#english_name'),
+            chinese_name: $('#chinese_name'),
+            bio: $('#bio')
+        };
+        
+        const suggestionsLists = {
+            search_term: $('#suggestions'),
+            english_name: $('#english_name_suggestions'),
+            chinese_name: $('#chinese_name_suggestions'),
+            bio: $('#bio_suggestions')
+        };
+        
+        let currentFocus = -1;
+        
+        // 防抖函数
+        function debounce(func, delay) {
+            let timer;
+            return function() {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, arguments), delay);
+            };
+        }
+
+        // 为所有输入框绑定输入事件
+        Object.keys(inputFields).forEach(fieldId => {
+            const input = inputFields[fieldId];
+            const suggestionsList = suggestionsLists[fieldId];
+            
+            input.on('input', debounce(function() {
+                console.log('Input event triggered for', fieldId);
+                const query = $(this).val().trim();
+                console.log('Query:', query);
+                if (query.length < 2) {
+                    suggestionsList.hide();
+                    return;
+                }
+
+                // 显示加载状态
+                suggestionsList.html('<div class="loading">搜索中...</div>').show();
+
+                // 通过Nginx代理调用Elasticsearch
+                $.ajax({
+                    url: '/es/ted_talks/_search',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        query: {
+                                bool: {
+                                    should: fieldId === 'english_name' ? 
+                                        [{
+                                            match: {
+                                                "metadata.english_name": {
+                                                    query: query,
+                                                    boost: 3.0,
+                                                    fuzziness: "AUTO",
+                                                }
+                                            }
+                                        }] :
+                                        fieldId === 'chinese_name' ? 
+                                        [{
+                                            match: {
+                                                "metadata.chinese_name": {
+                                                    query: query,
+                                                    boost: 3.0,
+                                                    fuzziness: "AUTO",
+                                                }
+                                            }
+                                        }] :
+                                        fieldId === 'bio' ?
+                                        [{
+                                            match: {
+                                                "metadata.content": {
+                                                    query: query,
+                                                    boost: 3.5,
+                                                    fuzziness: "AUTO",
+                                                }
+                                            }
+                                        }] :
+                                        [
+                                            {
+                                                match: {
+                                                    "metadata.content": {
+                                                        query: query,
+                                                        boost: 3.5,
+                                                        fuzziness: "AUTO",
+                                                        }
+                                                }
+                                            },
+                                            {
+                                                match: {
+                                                    "metadata.english_name": {
+                                                        query: query,
+                                                        boost: 2.0,
+                                                        fuzziness: "AUTO",
+                                                        }
+                                                }
+                                            },
+                                            {
+                                                match: {
+                                                    "metadata.chinese_name": {
+                                                        query: query,
+                                                        boost: 1.8,
+                                                        fuzziness: "AUTO",
+                                                        }
+                                                }
+                                            }
+                                        ]
+                            }
+                        },
+                        size: 10
+                    }),
+                    success: function(data) {
+                        console.log('AJAX success for', fieldId, data);
+                        suggestionsList.empty();
+                        
+                        if (data?.hits?.hits?.length > 0) {
+                            // 按score排序并提取建议词
+                            const suggestions = data.hits.hits
+                                .sort((a, b) => b._score - a._score)
+                                .map(hit => {
+                                    const source = hit._source;
+                                    if (fieldId === 'chinese_name') {
+                                        return source.metadata?.chinese_name || '';
+                                    } else if (fieldId === 'english_name') {
+                                        return source.metadata?.english_name || '';
+                                    }
+                                    return source.metadata?.content || 
+                                           source.metadata?.english_name || 
+                                           source.metadata?.chinese_name || '';
+                                })
+                                .filter(term => term)
+                                .slice(0, 10);
+                            
+                            if (suggestions.length > 0) {
+                                suggestions.forEach((term, index) => {
+                                    const hit = data.hits.hits[index];
+                                    const speakerId = hit._source?.metadata?.id || hit._source?.id || hit._id;
+                                    console.log('Speaker ID:', speakerId, 'for term:', term, 'Full hit:', hit);
+                                    const item = $('<div class="suggestion-item"></div>')
+                                        .text(term)
+                                        .on('click', function() {
+                                            console.log('Clicked on suggestion:', term, 'from field:', fieldId);
+                                            input.val(term);
+                                            suggestionsList.hide();
+                                            input.focus();
+                                        });
+                                    suggestionsList.append(item);
+                                });
+                            } else {
+                                suggestionsList.append('<div class="no-results">无匹配结果</div>');
+                            }
+                        } else {
+                            suggestionsList.append('<div class="no-results">无匹配结果</div>');
+                        }
+                    },
+                    error: function(xhr) {
+                    console.error(fieldId + '搜索建议请求失败:', xhr.status, xhr.responseText);
+                    let errorMsg = '搜索服务暂时不可用';
+                    try {
+                        const errData = JSON.parse(xhr.responseText);
+                        if (errData.error?.reason) {
+                            errorMsg = errData.error.reason;
+                        }
+                    } catch (e) {}
+                    suggestionsList.html(`<div class="error">${errorMsg}</div>`);
+                    }
+                });
+            }, 300)); // 300ms防抖
+        }); // 结束forEach循环
+        
+        // 添加新的CSS样式
+        $('head').append(`
+            <style>
+                .loading, .no-results, .error {
+                    padding: 8px 12px;
+                    color: #666;
+                    font-size: 14px;
+                    text-align: center;
+                }
+                .error {
+                    color: #d32f2f;
+                }
+            </style>
+        `);
+
+        // 键盘导航 - 为所有输入框绑定
+        Object.keys(inputFields).forEach(fieldId => {
+            inputFields[fieldId].on('keydown', function(e) {
+                const items = suggestionsLists[fieldId].find('.suggestion-item');
+                if (e.keyCode === 40) { // 向下箭头
+                    currentFocus++;
+                    highlightItem(items, currentFocus);
+                } else if (e.keyCode === 38) { // 向上箭头
+                    currentFocus--;
+                    highlightItem(items, currentFocus);
+                } else if (e.keyCode === 13) { // 回车
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        $(items[currentFocus]).click();
+                    }
+                }
+            });
+        });
+        
+        function highlightItem(items, index) {
+            items.removeClass('highlighted');
+            if (index >= items.length) currentFocus = 0;
+            if (index < 0) currentFocus = items.length - 1;
+            if (currentFocus >= 0 && currentFocus < items.length) {
+                $(items[currentFocus]).addClass('highlighted');
+                $(items[currentFocus])[0].scrollIntoView({
+                    block: 'nearest',
+                    behavior: 'smooth'
+                });
+            }
+        }
+        
+        // 点击其他地方隐藏建议
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.suggestions-container').length) {
+                suggestionsList.hide();
+            }
+        });
+    });
+    </script>

@@ -517,7 +517,6 @@ def talk_detail(talk_id):
                 s.chinese_name as speaker_name_zh,
                 s.year,
                 s.pdf_url,
-                t.eng_content,
                 t.speaker_name_zh as title_zh,
                 t.content as content,
                 t.core_viewpoint as content_display,
