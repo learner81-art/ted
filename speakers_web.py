@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import mysql.connector
 import subprocess
+from content_split_test import parse_content
 
 app = Flask(__name__)
 
@@ -88,24 +89,50 @@ def run_mysql_command(sql_command, timeout=30):
         print(f"完整错误: {e}")
         return None
 
-# 使用本地Docker配置
-db_config = None  # 强制使用Docker容器内执行方式
+# 使用本地端口配置
+db_config = LOCAL_PORT_CONFIG  # 使用本地端口连接
 
 @app.route('/')
 @app.route('/page/<int:page>')
 def show_speakers(page=1):
     per_page = 100
+    # 初始化所有变量
     search_term = request.args.get('search', '')
-    sort_order = request.args.get('sort', 'desc')  # 默认倒序
-    
+    sort_type = request.args.get('sort_type', 'english_name_desc')  # 默认按英文名降序
+    sort_field = 'english_name'
+    sort_direction = 'DESC'
     conn = None
-    try:
-        # 构建基础查询
-        base_query = """
-            SELECT id, english_name, chinese_name, bio, year, pdf_url
+    
+    # 确保base_query使用正确的变量名
+    base_query = """
+            SELECT 
+                MIN(id) as id,
+                english_name, 
+                chinese_name, 
+                bio, 
+                year, 
+                GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
             FROM speakers
             {where_clause}
-            ORDER BY english_name %s
+            GROUP BY english_name, chinese_name, bio, year
+            HAVING COUNT(DISTINCT pdf_url) > 0
+            ORDER BY {sort_field} {sort_direction}
+    """
+    try:
+        # 构建基础查询 - 改进去重和搜索逻辑
+        base_query = """
+                SELECT 
+                    MIN(id) as id,
+                    english_name, 
+                    chinese_name, 
+                    bio, 
+                    year, 
+                    GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
+                FROM speakers
+                {where_clause}
+                GROUP BY english_name, chinese_name, bio, year
+                HAVING COUNT(DISTINCT pdf_url) > 0
+                ORDER BY {sort_field} {sort_direction}
         """
         
         # 多条件搜索
@@ -117,7 +144,20 @@ def show_speakers(page=1):
         chinese_name = request.args.get('chinese_name', '').strip()
         year = request.args.get('year', '').strip()
         bio = request.args.get('bio', '').strip()
+        search_term = request.args.get('search_term', '').strip()
+        search_mode = request.args.get('search_mode', 'and')  # 默认AND模式
         
+        # 处理快速搜索和精确搜索的组合
+        if search_term:
+            conditions.append("""
+                (english_name LIKE %s OR 
+                chinese_name LIKE %s OR 
+                year LIKE %s OR 
+                bio LIKE %s)
+            """)
+            params.extend([f"%{search_term}%"] * 4)
+        
+        # 精确字段搜索(可以与快速搜索组合)
         if english_name:
             conditions.append("english_name LIKE %s")
             params.append(f"%{english_name}%")
@@ -133,7 +173,10 @@ def show_speakers(page=1):
             params.append(f"%{bio}%")
             
         if conditions:
-            where_clause = "WHERE " + " AND ".join(conditions)
+            if search_mode == 'or':
+                where_clause = "WHERE " + " OR ".join(conditions)
+            else:
+                where_clause = "WHERE " + " AND ".join(conditions)
             
         # 日志配置
         import logging
@@ -156,16 +199,19 @@ def show_speakers(page=1):
         logger.addHandler(file_handler)
         
         # 记录SQL调试信息
-        sort_type = request.args.get('sort', 'english_name_desc')
         logger.debug("\n=== SQL DEBUG ===")
-        logger.debug(f"Base query: {base_query.format(where_clause=where_clause if where_clause else '')}")
-        logger.debug(f"Where clause: {where_clause}")
+        logger.debug(f"Base query: {base_query}")
+        logger.debug(f"Where clause: {where_clause if where_clause else ''}")
         logger.debug(f"Params: {params}")
-        logger.debug(f"Sort type: {sort_type}")
+        logger.debug(f"Sort field: {sort_field}")
+        logger.debug(f"Sort direction: {sort_direction}")
         logger.debug(f"Page: {page}, Per page: {per_page}")
 
-        # 获取总记录数
-        count_query = "SELECT COUNT(*) as total FROM speakers"
+        # 获取去重后的总记录数
+        count_query = """
+            SELECT COUNT(DISTINCT CONCAT(english_name, chinese_name, bio, year, pdf_url)) as total 
+            FROM speakers
+        """
         if where_clause:
             count_query += " " + where_clause
             
@@ -204,7 +250,6 @@ def show_speakers(page=1):
             'chinese_name': chinese_name,
             'year': year,
             'bio': bio,
-            'sort': sort_order,
             'sort_type': sort_type
         }
         
@@ -215,17 +260,49 @@ def show_speakers(page=1):
                 conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor(dictionary=True)
         
-        query = base_query.format(where_clause=where_clause if where_clause else "")
+        # 解析排序类型 - 更健壮的处理逻辑
+        default_sort = 'english_name_desc'  # 默认排序方式
+        sort_type = request.args.get('sort_type', default_sort)
+        
+        # 设置默认值和允许的排序字段
+        allowed_sort_fields = ['english_name', 'chinese_name', 'year']
+        sort_field = 'english_name'
+        sort_direction = 'DESC'
+        
+        try:
+            if sort_type:
+                parts = sort_type.split('_')
+                if len(parts) >= 2:
+                    field_candidate = '_'.join(parts[:-1])
+                    # 验证排序字段是否允许
+                    if field_candidate in allowed_sort_fields:
+                        sort_field = field_candidate
+                    sort_direction = parts[-1].upper()  # 转换为大写
+                    # 验证排序方向
+                    if sort_direction not in ('ASC', 'DESC'):
+                        sort_direction = 'DESC'
+        except Exception as e:
+            print(f"排序参数解析错误: {e}, 使用默认排序")
+            sort_field = 'english_name'
+            sort_direction = 'DESC'
+
+        # 确保排序字段在GROUP BY子句中
+        if sort_field not in ['english_name', 'chinese_name', 'year']:
+            sort_field = 'english_name'
+
+        query = base_query.format(
+            where_clause=where_clause if where_clause else "",
+            sort_field=sort_field,
+            sort_direction=sort_direction
+        )
         query += " LIMIT %s OFFSET %s"
-        # 分离ORDER BY参数和WHERE条件参数
-        order_direction = 'ASC' if sort_type == 'english_name_asc' else 'DESC'
-        full_params = params + [order_direction, per_page, offset]
+        full_params = params + [per_page, offset]
         print(f"Final query: {query}")
         print(f"Full params: {full_params}")
 
         # 打印完整SQL语句
         # 注意: 这里需要将ORDER BY参数放在WHERE条件参数之后
-        full_query = query % tuple(params + [order_direction, per_page, offset])
+        full_query = query % tuple(params + [per_page, offset])
         logger.debug(f"Full SQL with parameters:\n{full_query}")
         
         if db_config:  # 远程连接方式
@@ -288,12 +365,13 @@ def show_speakers(page=1):
                             page=page,
                             per_page=per_page,
                             total_pages=total_pages,
-                            sort_order=sort_order,
                             current_sort=sort_type,
+                            sort_field=sort_field,
+                            sort_direction=sort_direction,
                             query_params=query_params,
                             debug_sql=full_query)  # 总是传递debug_sql
         
-    except (mysql.connector.Error, Exception) as err:
+    except mysql.connector.Error as err:
         error_type = "远程数据库" if db_config else "本地Docker"
         return f"""
         <h1>{error_type}连接错误</h1>
@@ -362,27 +440,33 @@ def talk_detail(talk_id):
         if not talk:
             return "Talk not found", 404
 
-        # 解析中英文内容
+        # 解析内容
         content = talk['content']
-        chinese_parts = []
-        english_parts = []
         
-        # 按行分割，奇数行中文，偶数行英文
-        lines = content.split('\n')
-        for i in range(0, len(lines), 2):
-            if i < len(lines):
-                chinese_parts.append(lines[i].strip())
-            if i+1 < len(lines):
-                english_parts.append(lines[i+1].strip())
+        # 提取内容概要
+        summary_start = content.find("内容概要：")
+        www_start = content.find("www.")
+        if summary_start != -1 and www_start != -1:
+            summary = content[summary_start+5:www_start].strip()
+        else:
+            summary = "无内容摘要"
         
-        # 生成摘要（取前3行中文）
-        summary = '\n'.join(chinese_parts[:3]) if chinese_parts else "无内容摘要"
+        # 提取内容详情
+        detail_start = content.find("内容详情：")
+        if detail_start != -1:
+            content_detail = content[detail_start+5:].strip()
+        else:
+            content_detail = content
+        
+        # 解析内容
+        parsed_content = parse_content(talk['content'])
         
         return render_template('talk_detail.html', 
                             talk=talk,
-                            chinese_parts=chinese_parts,
-                            english_parts=english_parts,
-                            summary=summary)
+                            speaker=parsed_content['speaker'],
+                            title=parsed_content['title'],
+                            summary=parsed_content['summary'],
+                            detail=parsed_content['detail'])
         
     except (mysql.connector.Error, Exception) as err:
         error_type = "远程数据库" if db_config else "本地Docker"

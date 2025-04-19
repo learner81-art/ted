@@ -1,7 +1,8 @@
 import re
-import PyPDF2
-from io import BytesIO
+import pdfplumber
 import requests
+from io import BytesIO
+from tqdm import tqdm
 
 def parse_ted_filename(filename):
     """
@@ -28,16 +29,78 @@ def parse_ted_filename(filename):
             'content': match.group(8)
         }
 
-def generate_summary(pdf_content):
+def extract_pdf_layout(pdf_path_or_url, max_pages=None):
     """
-    从PDF内容生成简单摘要
-    这里只是一个示例实现，实际应用中可以使用更复杂的NLP技术
+    新版PDF解析器：
+    1. 前3页处理元数据和摘要
+    2. 第4页起处理时间轴内容
+    3. 严格过滤只保留中文和必要标点
+    4. 去除多余空格和重复内容
+    
+    参数:
+        pdf_path_or_url: PDF文件路径或URL
+        max_pages: 可选，限制解析的最大页数
     """
-    # 简单提取前200个字符作为摘要
-    text = pdf_content[:200].replace('\n', ' ')
-    if len(text) == 200:
-        text += "..."
-    return text
+    # 从URL或本地文件获取PDF
+    if pdf_path_or_url.startswith('http'):
+        response = requests.get(pdf_path_or_url)
+        pdf_file = BytesIO(response.content)
+    else:
+        pdf_file = open(pdf_path_or_url, 'rb')
+    
+    content = {
+        'summary': [],
+        'translation': []
+    }
+    
+    # 严格中文过滤正则（只保留中文和必要标点）
+    chinese_filter = re.compile(r'[^\u4e00-\u9fa5，。？！、；：]')
+    
+    with pdfplumber.open(pdf_file) as pdf:
+        page_counter = 0
+        total_pages = len(pdf.pages)
+        if max_pages is not None and max_pages > 0:
+            total_pages = min(total_pages, max_pages)
+            
+        for i, page in enumerate(pdf.pages):
+            if max_pages is not None and i >= max_pages:
+                break
+            page_counter += 1
+            
+            # 提取页面文本
+            page_text = page.extract_text() or ""
+            
+            # 严格过滤非中文内容
+            filtered_text = chinese_filter.sub('', page_text)
+            
+            # 去除多余空格和空行
+            filtered_text = re.sub(r'\s+', ' ', filtered_text).strip()
+            
+            # 去除重复的"标题"前缀
+            filtered_text = re.sub(r'标题\s*', '', filtered_text)
+            
+            # 处理前3页内容
+            if page_counter <= 3:
+                content['summary'].append(filtered_text)
+                continue
+                
+            # 处理正文内容
+            if filtered_text:
+                content['translation'].append(filtered_text)
+    
+    if not pdf_path_or_url.startswith('http'):
+        pdf_file.close()
+        
+    # 合并翻译内容并去除重复段落
+    unique_content = []
+    seen = set()
+    for paragraph in content['translation']:
+        if paragraph not in seen:
+            seen.add(paragraph)
+            unique_content.append(paragraph)
+    
+    content['translation'] = "\n\n".join(unique_content)
+    return content
 
 def parse_ted_file(file_path):
     """
@@ -52,33 +115,41 @@ def parse_ted_file(file_path):
         if line.strip():  # 跳过空行
             result = parse_ted_filename(line.strip())
             if result:
-                # 尝试读取PDF内容
                 try:
-                    with open(f"analyze/02.历年TED文档PDF带注释/{line.strip()}", 'rb') as pdf_file:
-                        reader = PyPDF2.PdfReader(pdf_file)
-                        pdf_content = ""
-                        for page in reader.pages:
-                            pdf_content += page.extract_text()
-                        
-                        summary = generate_summary(pdf_content)
-                except Exception as e:
-                    summary = "待定"
-                
-                # 格式化输出
-                formatted = f"""
+                    # 使用新的布局解析函数
+                    pdf_path = f"analyze/02.历年TED文档PDF带注释/{line.strip()}"
+                    content = extract_pdf_layout(pdf_path)
+                    
+                    # 格式化输出
+                    formatted = f"""
 文件名: {line.strip()}
 演讲者: {result['chinese_name']}
 年份: {result['year']}
 主题: {result['content']}
-总结: {summary}
+                    概要: {"\n\n".join([f"=== 第{i+1}页 ===\n{page}" for i, page in enumerate(content['summary']) if page.strip()]).strip()}
+
+过滤后内容:
+{content['translation'].strip()}
 """
-                results.append(formatted)
+                    results.append(formatted)
+                except Exception as e:
+                    formatted = f"""
+文件名: {line.strip()}
+演讲者: {result['chinese_name']}
+年份: {result['year']}
+主题: {result['content']}
+错误: {str(e)}
+"""
+                    results.append(formatted)
     
     return results
 
 # 示例用法
 if __name__ == "__main__":
-    # 测试整个文件
-    results = parse_ted_file("analyze/02.历年TED文档PDF带注释/TED_analysis.txt")
-    for result in results[:1]:  # 只打印第一个结果作为示例
-        print(result)
+    # 测试指定PDF URL
+    test_url = "http://ted.source.com/AbigailDisney_2020[%E9%98%BF%E6%AF%94%E7%9B%96%E5%B0%94_%E8%BF%AA%E5%A3%AB%E5%B0%BC][%E5%B0%8A%E4%B8%A5%E4%B8%8D%E6%98%AF%E7%89%B9%E6%9D%83_%E8%80%8C%E6%98%AF%E5%8A%B3%E5%8A%A8%E8%80%85%E7%9A%84%E6%9D%83%E5%8A%9B].pdf"
+    content = extract_pdf_layout(test_url)
+    print("=== PDF解析结果 ===")
+    print("概要:", "\n".join(content['summary']).strip())
+    print("\n过滤后内容:")
+    print(content['translation'])
