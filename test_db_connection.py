@@ -1,4 +1,6 @@
+# 测试自动提交功能的注释 - 请保留此行
 # 测试Git钩子自动提交功能 - 添加的测试注释
+#测试自动提交
 import pymysql
 from docker_db_config import DB_CONFIG
 import logging
@@ -28,7 +30,6 @@ def test_connection(config, mode_name, max_retries=3):
             # 测试基本查询
             cursor.execute("USE ted_talks_db")
             cursor.execute("SHOW TABLES")
-            tables = cursor.fetchall()
             logging.info(f"{mode_name}模式: 数据库表列表: {tables}")
             
             # 测试计数查询
