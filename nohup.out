@@ -1,0 +1,55 @@
+nohup: python: No such file or directory
+ * Serving Flask app 'speakers_web'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.101.203:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 157-674-797
+/usr/local/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:277: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-jw82e9ka'}
+  warnings.warn(
+ * Serving Flask app 'speakers_web'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.101.203:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 157-674-797
+ * Serving Flask app 'speakers_web'
+ * Debug mode: on
+Address already in use
+Port 5050 is in use by another program. Either identify and stop that program, or start the server with a different port.
+ * Serving Flask app 'speakers_web'
+ * Debug mode: on
+Address already in use
+Port 5050 is in use by another program. Either identify and stop that program, or start the server with a different port.
+ * Serving Flask app 'speakers_web'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.101.203:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 157-674-797
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Python runtime state: core initialized
+/usr/local/Cellar/python@3.13/3.13.2/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:277: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-1lm4vq41'}
+  warnings.warn(
+Fatal Python error: init_sys_streams: can't initialize sys standard streams
+Python runtime state: core initialized
+OSError: [Errno 9] Bad file descriptor
+
+Current thread 0x000000010706d600 (most recent call first):
+  <no Python frame>
+OSError: [Errno 9] Bad file descriptor
+
+Current thread 0x000000010ea45600 (most recent call first):
+  <no Python frame>

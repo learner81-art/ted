@@ -1,0 +1,27 @@
+任务完成
+TED演讲者Web服务部署任务已完成。服务已配置为：
+
+监听端口：5050
+自动启动：已启用
+日志记录：已配置输出和错误日志
+访问地址：http://127.0.0.1:5050
+服务管理命令：
+
+启动：launchctl start com.ted.speakersweb
+停止：launchctl stop com.ted.speakersweb
+状态：launchctl list | grep com.ted.speakersweb
+
+
+
+MySQL 5.7容器已成功部署并配置完成：
+
+容器名称：mysql57
+运行状态：正常
+端口映射：3306:3306
+数据卷挂载：/Users/a/Desktop/data/mysql_data:/var/lib/mysql
+root密码：my-secret-pw
+远程访问：已启用
+可以通过以下命令连接MySQL：
+docker exec -it mysql57 mysql -uroot -pmy-secret-pw
+或从外部使用：
+mysql -h127.0.0.1 -uroot -pmy-secret-pw

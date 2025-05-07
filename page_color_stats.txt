@@ -1,0 +1,23 @@
+=== PDF第2页颜色统计 ===
+总单词数: 439
+中文字符数: 1203
+
+背景颜色统计:
+dark_gray: 339 处
+red: 87 处
+blue: 10 处
+black: 3 处
+
+文字颜色统计(按单词):
+
+dark_gray (339 单词):
+In, Grandpa's, day,, a, job, at, was, not, a, gig.在我祖父的年代,, 迪士尼乐园的工作不是临时性的。, [02:01], A, person, could, expect, to, own, a, home,, raise, a, family,, ,, in, some, without, worrying, on, just, what, he, 员工可以期盼拥有, 一座自己的房子,, 供养一个家庭,, 获得体面的医疗保险,, 安安稳稳、毫无顾虑地退休,, 单靠他在乐园挣的钱就可以实现。[02:06], there, at, the, park., n.船尾;末端;adj.严厉的;坚定的;, n.(美)炖水果;, vt.跟…顶嘴;, n.大便;, vi.应受,应得;vt., 应受,应得;, n.尊敬,尊重;, vt.尊敬,尊重;, n.垃圾;废物;, 迪士尼乐园, 俯身;折转;, vt.使用;存取;接近;n.进入;使用权;通路;, adj.正派的;得体的;相当好的;, n.卫生保健;, n.退隐;, v.(令)退职;, (比赛等);, n.安全;, adj.安全的;, adj.挣得的;v.挣得;引起(earn的过去分词);, Mind, you,, Grandpa, fought, the, ,, and, he, 要补充的是,祖父曾与工会有过争执,, 他的态度非常坚, fought, them, hard., 决。[02:20], He, said, he, didn't, like, to, be, forced, to, do, something, he, wanted, to, do, 他说他不喜欢被强迫, 去做一些他自愿做的事情。, ., [02:24], That, was, and, maybe, even, a, tiny, 那当然是十足的家长作风,, 甚至稍稍有些胡搅蛮缠。, of, BS., [02:28], He, wasn't, an, angel,, and, everyone, wasn't, well, and, treated, across, the, ,, something, that's, 他并不是一个完美的人,, 在整个公司里,并不是每个人, 都得到了良好公正的待遇。, 这是众所周知的。, ., [02:33], But, I, think, in, his, he, had, a, very, deep, to, the, idea, that, he, had, a, 但是我认为,在他的内心,, 他坚守着这样一个理念, ,, 即, 他对每一位为他工作的人, 都负有道德上的责任。, to, every, human, being, that, worked, for, [02:42], him., That, actually, wasn't, such, an, for对于那个年代的首席执行官们,, 这个态度其实并非罕, CEOs, of, the, day., 见。[02:52], n.工会;, (union的复数), adv.自动地;以自由意志;, n.排;, adj.讨厌的;, vt.排列;, n., 家长式统治,家长作风;, 当然, 小块,有点儿, adv.相当地;公平地;简直;, n.公司;陪伴,同伴;, 连队;vi.交往;vt.陪伴;;, adj.著名的;众所周知的;清楚明白的;, n.核心;要点;果心;[计]磁心;vt.挖...的核;, n.承诺;投入;保证;许诺;, n.寓意;, adj.道德的;, n.义务;, (已承诺的或法律等规定的)义, 务;, adj.不寻常的;罕有的;adv.非常地;, n.态度;看法;意见;姿势;, But, when, my, grandfather, died, in, 1971,, a, new, was, beginning, to, take, hold, of, the, American, and, the, 但是当祖父于, 1971, 年去世的时候,, 一个新的观念模, 式开始, 在美国,并最终在全球, 占据了了主导地位。, ., [02:57], got, shown, the, door, by, economist, Milton, Friedman,, among, others,, who, the, idea, of, 蟋蟀杰米尼被经济学家, 米尔顿·弗里德曼请出了门,, 他和其他人, 宣传推广了股东至上的思想。[03:07], ., Now,, is, a, pretty, 如今,想一想,股东至上, 是个很合理的想法。[03:16], idea, when, you, think, about, it., oon">Shareholders, own, the, oon">com, >,, shareholders, want, profits, and, growth,, so, you, 股东拥有这家公司,, 股东想要利润和增长,, 所以你要, 优先考虑, 利润和增长的问题。[03:22], oon">prioritize, profits, and, growth., n.心态;倾向;习惯;精神状态;, adv.最后,终于;, adj.全球的;总体的;球形的;, n., 想象;想象力;创造力;想象的事物;, int.天啊(表示温和的惊讶所用感叹词);, 板球(运动);蟋蟀, vt.普及;使通俗化;vi.通俗化;, n.股东;股票持有人;, n.首位;卓越;大主教的职位;, adj.合理的,公道的;通情达理的;, n.[金融]股东,投资者;, (shareholder的复数);, adv.因此;所以;, Very, ., 非常合理。[03:32], But, ,, was, an, idea, that, became, a, and, then, that, jumped, the, ,, and, it, came, to, everything, about, the, way, 但是,很遗憾,股东至上, 这个想法成为了一种观念模, 式,, 随后这个观念模式发生了突变。, 它开始从根本上, 改变了, 公司乃至政府的, 领导管理方式。[03:34], and, even, governments, were, led, and, managed., Milton, Friedman's, in, the, "New, York, 《纽约时报》发表了, 米尔顿·弗里德曼的核心专稿,, Times", [03:50]
+
+red (87 单词):
+Disneyland, access, decent, retire, security, earned, stern:, sassed:, doo-doo:, deserve:, respect:, garbage:, Disneyland:, access:, decent:, retire:, security:, earned:, unions, voluntarily, rank, paternalism, bit, fairly, company, well-known, core, commitment, moral, obligation, uncommon, attitude, unions:, voluntarily:, rank:, paternalism:, bit:, fairly:, company:, well-known:, core:, commitment:, moral:, obligation:, uncommon:, attitude:, mindset, eventually, global, imagination, Jiminy, Cricket, popularized, shareholder, primacy, shareholder, primacy, reasonable, r="Mar, r="Mar, pany, therefore, r="Mar, mindset:, eventually:, global:, imagination:, Jiminy:, Cricket:, popularized:, shareholder:, primacy:, reasonable:, Shareholders:, therefore:, sensible, unfortunately, shareholder, primacy, mindset, mindset, rails, fundamentally, alter, companies, pivotal, op-ed
+
+blue (10 单词):
+health, care, bend, over:, health, care:, of, course, of, course:
+
+black (3 单词):
+锡育软件, 第2页/共7页, XiYuSoft.com
