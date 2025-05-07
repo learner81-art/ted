@@ -1,3 +1,4 @@
+# 测试Git钩子自动提交功能 - 添加的测试注释
 import pymysql
 from docker_db_config import DB_CONFIG
 import logging
@@ -164,3 +165,5 @@ if __name__ == "__main__":
                     print(row)
             else:
                 print(f"\n{table}表查询失败或不存在")
+
+# 测试Git钩子自动提交功能 - 添加的测试注释2
