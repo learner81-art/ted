@@ -199,3 +199,4 @@ def insert_test_talk():
 if __name__ == "__main__":
     # 批量处理所有PDF记录
     process_all_pdfs()
+#test hook
