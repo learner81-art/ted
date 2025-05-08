@@ -132,3 +132,7 @@
 127.0.0.1 - - [08/May/2025 19:53:51] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 19:55:32] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 19:56:20] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:59:30] "GET /talk_detail/3450 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:59:35] "[33mGET /speakers HTTP/1.0[0m" 404 -
+127.0.0.1 - - [08/May/2025 19:59:42] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:59:46] "[33mGET /speakers HTTP/1.0[0m" 404 -
