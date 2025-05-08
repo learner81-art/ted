@@ -5,6 +5,25 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { color: #e62b1e; }
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+        }
+        .bg-success {
+            background-color: #28a745!important;
+            color: white;
+        }
+        .bg-secondary {
+            background-color: #6c757d!important;
+            color: white;
+        }
         
         /* 搜索建议样式 */
         .suggestions-container {
@@ -144,23 +163,22 @@
     <table>
         <thead>
             <tr>
-                <th>序号</th>
-                <th>
+                <th style="width: 5%">序号</th>
+                <th style="width: 15%">
                     <a href="?sort_type=english_name{% if current_sort == 'english_name_asc' %}_desc{% else %}_asc{% endif %}" 
                        style="text-decoration: none; color: inherit;">
                         英文名 {% if current_sort == 'english_name_asc' %}↑{% elif current_sort == 'english_name_desc' %}↓{% endif %}
                     </a>
                 </th>
-                <th>中文名</th>
-                <th>
+                <th style="width: 15%">中文名</th>
+                <th style="width: 8%">
                     <a href="?sort_type=year{% if current_sort == 'year_asc' %}_desc{% else %}_asc{% endif %}" 
                        style="text-decoration: none; color: inherit;">
                         年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
                     </a>
                 </th>
-                <th>译文</th>
-                <th>标题</th>
-                
+                <th style="width: 10%">译文状态</th>
+                <th style="width: 47%">标题</th>
             </tr>
         </thead>
         <tbody>
@@ -309,24 +327,6 @@
                                         }] :
                                         fieldId === 'chinese_name' ? 
                                         [{
-                                            match: {
-                                                "metadata.chinese_name": {
-                                                    query: query,
-                                                    boost: 3.0,
-                                                    fuzziness: "AUTO",
-                                                }
-                                            }
-                                        }] :
-                                        fieldId === 'bio' ?
-                                        [{
-                                            match: {
-                                                "metadata.content": {
-                                                    query: query,
-                                                    boost: 3.5,
-                                                    fuzziness: "AUTO",
-                                                }
-                                            }
-                                        }] :
                                         [
                                             {
                                                 match: {
