@@ -128,6 +128,7 @@ def show_speakers(page=1):
                 chinese_name, 
                 bio, 
                 year, 
+                transform_status,
                 GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
             FROM speakers
             {where_clause}
@@ -144,7 +145,7 @@ def show_speakers(page=1):
                     chinese_name, 
                     bio, 
                     year, 
-                    transform_status
+                    transform_status,
                     GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
                 FROM speakers
                 {where_clause}
