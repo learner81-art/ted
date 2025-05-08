@@ -186,19 +186,20 @@
                     textarea.value = content;
                     document.body.appendChild(textarea);
                     textarea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textarea);
-                                .then(() => {
-                                    const originalText = copyBtn.innerHTML;
-                                    copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>已复制';
-                                    setTimeout(() => {
-                                        copyBtn.innerHTML = originalText;
-                                    }, 2000);
-                                })
-                                .catch(err => {
-                                    console.error('复制失败:', err);
-                                    alert('复制失败，请手动选择文本复制');
-                                });
+                    try {
+                        document.execCommand('copy');
+                        const originalText = copyBtn.innerHTML;
+                        copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>已复制';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = originalText;
+                        }, 2000);
+                        alert('内容已复制到剪贴板');
+                    } catch (err) {
+                        console.error('复制失败:', err);
+                        alert('复制失败，请手动选择文本复制');
+                    } finally {
+                        document.body.removeChild(textarea);
+                    }
                         });
                     }
 
