@@ -103,3 +103,8 @@
  * Debugger PIN: 239-020-829
 127.0.0.1 - - [08/May/2025 19:25:45] "GET /talk_detail/3524 HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 19:25:53] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:26:58] "GET /talk_detail/3524 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:27:12] "GET /?search_term=&english_name=ZubaidaBai&chinese_name=&year= HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:27:14] "GET /talk_detail/3525 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:28:38] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:28:43] "GET /talk_detail/3525 HTTP/1.0" 200 -

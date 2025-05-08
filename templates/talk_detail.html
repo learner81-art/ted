@@ -129,12 +129,7 @@
                 </div>
                 {% endif %} -->
 
-                {% if talk.eng_content %}
-                <div class="talk-content mt-3">
-                    <h4>English Content</h4>
-                    {{ talk.eng_content}}
-                </div>
-                {% endif %}
+               
 
                 <!-- 中文内容区域 -->
                 <div class="talk-content mt-3" id="chineseContentContainer">
@@ -167,7 +162,12 @@
                         </div>
                     </form>
                 </div>
-
+                {% if talk.eng_content %}
+                <div class="talk-content mt-3">
+                    <h4>English Content</h4>
+                    {{ talk.eng_content}}
+                </div>
+                {% endif %}
                 <script>
                 // 中文内容显示/编辑切换
                 document.addEventListener('DOMContentLoaded', function() {
