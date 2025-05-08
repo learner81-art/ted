@@ -245,8 +245,8 @@
                             }
                         })
                         .catch(error => {
-                            console.error('Error:', error);
-                            alert('请求失败');
+                            console.error('请求失败:', error);
+                            // 不显示弹窗，仅记录到控制台
                         });
                     });
                 });
