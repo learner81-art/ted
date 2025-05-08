@@ -140,7 +140,7 @@
                 <div class="talk-content mt-4">
                     <h4>中文内容</h4>
                     <form id="chineseContentForm">
-                        <input type="hidden" name="talk_id" value="{{ talk.id }}">
+                        <input type="hidden" name="talk_id" value="{{ talk.speaker_id }}">
                         <div class="mb-3">
                             <textarea class="form-control" name="chinese_content" rows="5" 
                                 placeholder="请输入中文内容...">{% if talk.chinese_content %}{{ talk.chinese_content }}{% endif %}</textarea>
