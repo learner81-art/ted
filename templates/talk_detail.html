@@ -193,7 +193,7 @@
                         setTimeout(() => {
                             copyBtn.innerHTML = originalText;
                         }, 2000);
-                        alert('内容已复制到剪贴板');
+                        // 不显示弹窗，仅通过按钮状态变化反馈
                     } catch (err) {
                         console.error('复制失败:', err);
                         alert('复制失败，请手动选择文本复制');
