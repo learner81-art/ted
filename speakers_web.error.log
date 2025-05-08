@@ -193,3 +193,4 @@ jinja2.exceptions.UndefinedError: 'talk' is undefined
 127.0.0.1 - - [08/May/2025 20:28:47] "GET / HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:28:59] "GET / HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:29:04] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:29:47] "GET /talk_detail/3525 HTTP/1.0" 200 -

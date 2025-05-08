@@ -624,6 +624,10 @@ def update_chinese_content():
             update_query = "UPDATE talks SET chinese_content = %s WHERE speaker_id = %s"
             cursor.execute(update_query, (chinese_content, talk_id))
             conn.commit()
+
+            update_query = "UPDATE speakers SET transform_status = %s WHERE id = %s"
+            cursor.execute(update_query, (2, talk_id))
+            conn.commit()
             
             return jsonify({'success': True})
             
