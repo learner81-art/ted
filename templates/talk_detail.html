@@ -136,40 +136,80 @@
                 </div>
                 {% endif %}
 
-                <!-- 中文内容编辑区域 -->
-                <div class="talk-content mt-4">
-                    <h4>中文内容</h4>
-                    <form id="chineseContentForm">
+                <!-- 中文内容区域 -->
+                <div class="talk-content mt-3" id="chineseContentContainer">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>Chinese Content</h4>
+                        <button id="editChineseBtn" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-edit me-1"></i>编辑
+                        </button>
+                    </div>
+                    
+                    <!-- 显示模式 -->
+                    <div id="chineseDisplay" class="mb-3">
+                        {% if talk.chinese_content %}
+                            {{ talk.chinese_content }}
+                        {% else %}
+                            <p class="text-muted">暂无中文内容</p>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- 编辑模式 -->
+                    <form id="chineseContentForm" style="display: none;">
                         <input type="hidden" name="talk_id" value="{{ talk.speaker_id }}">
                         <div class="mb-3">
                             <textarea class="form-control" name="chinese_content" rows="5" 
                                 placeholder="请输入中文内容...">{% if talk.chinese_content %}{{ talk.chinese_content }}{% endif %}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">更新中文内容</button>
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">保存</button>
+                            <button type="button" id="cancelEditBtn" class="btn btn-outline-secondary">取消</button>
+                        </div>
                     </form>
                 </div>
 
                 <script>
-                // 处理中文内容提交
-                document.getElementById('chineseContentForm').addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const formData = new FormData(this);
+                // 中文内容显示/编辑切换
+                document.addEventListener('DOMContentLoaded', function() {
+                    const editBtn = document.getElementById('editChineseBtn');
+                    const cancelBtn = document.getElementById('cancelEditBtn');
+                    const displayDiv = document.getElementById('chineseDisplay');
+                    const form = document.getElementById('chineseContentForm');
                     
-                    fetch('/update_chinese_content', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('中文内容更新成功');
-                        } else {
-                            alert('更新失败: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('请求失败');
+                    editBtn.addEventListener('click', function() {
+                        displayDiv.style.display = 'none';
+                        form.style.display = 'block';
+                    });
+                    
+                    cancelBtn.addEventListener('click', function() {
+                        form.style.display = 'none';
+                        displayDiv.style.display = 'block';
+                    });
+                    
+                    // 处理中文内容提交
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const formData = new FormData(this);
+                        
+                        fetch('/update_chinese_content', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                displayDiv.innerHTML = form.querySelector('textarea').value || '<p class="text-muted">暂无中文内容</p>';
+                                form.style.display = 'none';
+                                displayDiv.style.display = 'block';
+                                alert('中文内容更新成功');
+                            } else {
+                                alert('更新失败: ' + (data.message || '未知错误'));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('请求失败');
+                        });
                     });
                 });
                 </script>
