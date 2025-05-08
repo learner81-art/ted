@@ -164,12 +164,40 @@
                 </div>
                 {% if talk.eng_content %}
                 <div class="talk-content mt-3">
-                    <h4>English Content</h4>
-                    {{ talk.eng_content}}
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4>English Content</h4>
+                        <button id="copyEnglishBtn" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-copy me-1"></i>复制
+                        </button>
+                    </div>
+                    <div id="englishContentText">
+                        {{ talk.eng_content}}
+                    </div>
                 </div>
                 {% endif %}
                 <script>
-                // 中文内容显示/编辑切换
+                // 复制英文内容功能
+                document.addEventListener('DOMContentLoaded', function() {
+                    const copyBtn = document.getElementById('copyEnglishBtn');
+                    if (copyBtn) {
+                        copyBtn.addEventListener('click', function() {
+                            const content = document.getElementById('englishContentText').textContent;
+                            navigator.clipboard.writeText(content)
+                                .then(() => {
+                                    const originalText = copyBtn.innerHTML;
+                                    copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>已复制';
+                                    setTimeout(() => {
+                                        copyBtn.innerHTML = originalText;
+                                    }, 2000);
+                                })
+                                .catch(err => {
+                                    console.error('复制失败:', err);
+                                    alert('复制失败，请手动选择文本复制');
+                                });
+                        });
+                    }
+
+                    // 中文内容显示/编辑切换
                 document.addEventListener('DOMContentLoaded', function() {
                     const editBtn = document.getElementById('editChineseBtn');
                     const cancelBtn = document.getElementById('cancelEditBtn');
