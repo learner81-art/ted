@@ -149,3 +149,12 @@
 127.0.0.1 - - [08/May/2025 20:09:49] "GET /talk_detail/3500 HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:10:23] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:10:24] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:18:48] "GET /talk_detail/3502 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:18:58] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:19:10] "GET /talk_detail/3524 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:19:25] "GET /talk_detail/3523 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:19:47] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:20:27] "GET /talk_detail/3521 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:20:34] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:21:33] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:21:58] "POST /update_chinese_content HTTP/1.0" 200 -
