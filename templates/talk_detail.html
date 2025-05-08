@@ -238,9 +238,10 @@
                                 displayDiv.innerHTML = form.querySelector('textarea').value || '<p class="text-muted">暂无中文内容</p>';
                                 form.style.display = 'none';
                                 displayDiv.style.display = 'block';
-                                alert('中文内容更新成功');
+                                // 不显示成功提示，直接完成保存
                             } else {
-                                alert('更新失败: ' + (data.message || '未知错误'));
+                                console.error('更新失败:', data.message || '未知错误');
+                                // 失败时也不显示弹窗，仅记录到控制台
                             }
                         })
                         .catch(error => {
