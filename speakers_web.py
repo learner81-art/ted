@@ -608,10 +608,7 @@ def talk_detail(talk_id):
 def update_chinese_content():
     """更新中文内容到数据库"""
     try:
-        if not request.is_json:
-            return jsonify({'success': False, 'error': 'Content-Type must be application/json'}), 415
-            
-        data = request.get_json(force=True)  # force=True 确保即使 Content-Type 不正确也尝试解析
+        data = request.get_json(force=True)  # 强制解析JSON数据，忽略Content-Type
         talk_id = data.get('talk_id')
         chinese_content = data.get('chinese_content')
         
