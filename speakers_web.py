@@ -518,7 +518,7 @@ def talk_detail(talk_id):
                 s.year,
                 s.pdf_url,
                 t.eng_content,
-                t.id,
+                t.speaker_id,
                 t.speaker_name_zh as title_zh,
                 t.content as content,
                 t.chinese_content as content_display,
