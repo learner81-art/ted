@@ -177,7 +177,7 @@
                         年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
                     </a>
                 </th>
-                <th style="width: 10%">译文状态</th>
+                <th style="width: 10%">译文</th>
                 <th style="width: 47%">标题</th>
             </tr>
         </thead>
@@ -327,9 +327,9 @@
                                         }] :
                                         fieldId === 'chinese_name' ? 
                                         [{
-                                        [
-                                            {
-                                                match: {
+                                            match: {
+                                                "metadata.chinese_name": {
+                                                    query: query,
                                                     "metadata.content": {
                                                         query: query,
                                                         boost: 3.5,
