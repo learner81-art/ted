@@ -604,5 +604,39 @@ def talk_detail(talk_id):
             cursor.close()
             conn.close()
 
+@app.route('/update_chinese_content', methods=['POST'])
+def update_chinese_content():
+    """更新中文内容到数据库"""
+    try:
+        data = request.get_json()
+        talk_id = data.get('talk_id')
+        chinese_content = data.get('chinese_content')
+        
+        if not talk_id or chinese_content is None:
+            return jsonify({'success': False, 'error': '缺少必要参数'}), 400
+        
+        conn = None
+        cursor = None
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            
+            update_query = "UPDATE talks SET chinese_content = %s WHERE speaker_id = %s"
+            cursor.execute(update_query, (chinese_content, talk_id))
+            conn.commit()
+            
+            return jsonify({'success': True})
+            
+        except mysql.connector.Error as err:
+            return jsonify({'success': False, 'error': str(err)}), 500
+            
+        finally:
+            if conn and conn.is_connected():
+                cursor.close()
+                conn.close()
+                
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)
