@@ -173,7 +173,7 @@
                     <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
                 </td>
                 <td>
-                    {% if .chinese_content %}
+                    {% if talk.chinese_content %}
                     <span class="badge bg-success">有译文</span>
                     {% else %}
                     <span class="badge bg-secondary">无译文</span>
