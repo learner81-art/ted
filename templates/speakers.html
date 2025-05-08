@@ -173,7 +173,7 @@
                     <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
                 </td>
                 <td>
-                    {% if speakers.transform_status == 2 %}
+                    {% if speaker.transform_status == 2 %}
                     <span class="badge bg-success translation-status-badge">有译文</span>
                     {% else %}
                     <span class="badge bg-secondary translation-status-badge">无译文</span>
