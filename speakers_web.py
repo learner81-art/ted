@@ -608,9 +608,8 @@ def talk_detail(talk_id):
 def update_chinese_content():
     """更新中文内容到数据库"""
     try:
-        data = request.get_json(force=True)  # 强制解析JSON数据，忽略Content-Type
-        talk_id = data.get('talk_id')
-        chinese_content = data.get('chinese_content')
+        talk_id = request.form.get('talk_id')
+        chinese_content = request.form.get('chinese_content')
         
         if not talk_id or chinese_content is None:
             return jsonify({'success': False, 'error': '缺少必要参数'}), 400
