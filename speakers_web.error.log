@@ -223,3 +223,4 @@ jinja2.exceptions.UndefinedError: 'talk' is undefined
  * Debugger is active!
  * Debugger PIN: 239-020-829
  * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
