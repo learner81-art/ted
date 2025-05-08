@@ -92,3 +92,6 @@
 127.0.0.1 - - [08/May/2025 19:19:45] "[31m[1mPOST /update_chinese_content HTTP/1.0[0m" 400 -
 127.0.0.1 - - [08/May/2025 19:19:48] "GET /talk_detail/3524 HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 19:19:52] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:25:05] "GET /talk_detail/3524 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:25:13] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 19:25:17] "GET /talk_detail/3524 HTTP/1.0" 200 -

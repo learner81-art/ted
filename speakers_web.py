@@ -521,7 +521,7 @@ def talk_detail(talk_id):
                 t.speaker_id,
                 t.speaker_name_zh as title_zh,
                 t.content as content,
-                t.chinese_content as content_display,
+                t.chinese_content,
                 t.page_count
             FROM speakers s
             JOIN talks t ON s.id = t.speaker_id
