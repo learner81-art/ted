@@ -229,3 +229,10 @@ jinja2.exceptions.UndefinedError: 'talk' is undefined
  * Debugger is active!
  * Debugger PIN: 239-020-829
 127.0.0.1 - - [08/May/2025 20:40:44] "GET / HTTP/1.0" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web.py', reloading
+ * Restarting with stat
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [08/May/2025 20:41:41] "GET / HTTP/1.0" 200 -
