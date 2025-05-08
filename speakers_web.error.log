@@ -250,3 +250,8 @@ jinja2.exceptions.UndefinedError: 'talk' is undefined
 127.0.0.1 - - [08/May/2025 20:58:01] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:58:01] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 20:58:38] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:59:13] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:59:23] "GET /page/2?sort_type=english_name_desc HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 20:59:33] "GET /talk_detail/3337 HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 21:00:00] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 21:00:13] "GET / HTTP/1.0" 200 -
