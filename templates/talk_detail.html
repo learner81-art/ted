@@ -181,8 +181,13 @@
                     const copyBtn = document.getElementById('copyEnglishBtn');
                     if (copyBtn) {
                         copyBtn.addEventListener('click', function() {
-                            const content = document.getElementById('englishContentText').textContent;
-                            navigator.clipboard.writeText(content)
+                    const content = document.getElementById('englishContentText').innerText;
+                    const textarea = document.createElement('textarea');
+                    textarea.value = content;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
                                 .then(() => {
                                     const originalText = copyBtn.innerHTML;
                                     copyBtn.innerHTML = '<i class="fas fa-check me-1"></i>已复制';
