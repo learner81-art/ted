@@ -58,6 +58,24 @@
         .pdf-link:hover {
             color: #e62b1e;
         }
+        /* 徽章样式 */
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .badge-success {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .badge-danger {
+            background-color: #F44336;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -140,6 +158,7 @@
                     </a>
                 </th>
                 <th>中文名</th>
+                <th>译文</th>
                 <th>
                     <a href="?sort_type=year{% if current_sort == 'year_asc' %}_desc{% else %}_asc{% endif %}" 
                        style="text-decoration: none; color: inherit;">
@@ -155,6 +174,11 @@
                 <td>{{ (page-1)*per_page + loop.index }}</td>
                 <td>{{ speaker.english_name }}</td>
                 <td>{{ speaker.chinese_name }}</td>
+                <td>
+                    <span class="badge {% if speaker.transform_status == 2 %}badge-success{% else %}badge-danger{% endif %}">
+                        {% if speaker.transform_status == 2 %}有译文{% else %}无译文{% endif %}
+                    </span>
+                </td>
                 <td>{{ speaker.year }}</td>
                 <td>
                     <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>

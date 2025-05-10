@@ -690,3 +690,10 @@ Exception: 无法连接到Elasticsearch，请检查服务是否运行
 127.0.0.1 - - [10/May/2025 21:58:05] "GET / HTTP/1.0" 200 -
 127.0.0.1 - - [10/May/2025 21:58:12] "GET /?search_term=&english_name=Bill&chinese_name=&year=&bio= HTTP/1.0" 200 -
 127.0.0.1 - - [10/May/2025 21:58:23] "GET /?search_term=地方全球化_全球地方化&english_name=&chinese_name=&year=&bio= HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:12:45] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:12:48] "GET /talk_detail/3509 HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:13:08] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:13:32] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:18:03] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:19:22] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 22:19:40] "GET / HTTP/1.0" 200 -
