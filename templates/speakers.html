@@ -5,25 +5,6 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { color: #e62b1e; }
-        .badge {
-            display: inline-block;
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: baseline;
-            border-radius: 0.25rem;
-        }
-        .bg-success {
-            background-color: #28a745!important;
-            color: white;
-        }
-        .bg-secondary {
-            background-color: #6c757d!important;
-            color: white;
-        }
         
         /* 搜索建议样式 */
         .suggestions-container {
@@ -85,7 +66,7 @@
     <form method="get" action="/" style="margin-bottom: 20px;">
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
             <div>
-                <label for="search_term" style="display: block; margin-bottom: 5px; font-weight: bold;">标题</label>
+                <label for="search_term" style="display: block; margin-bottom: 5px; font-weight: bold;">快速搜索</label>
         <div class="suggestions-container">
             <input type="text" id="search_term" name="search_term" placeholder="输入任意关键词..." 
                    value="{{ request.args.get('search_term', '') }}"
@@ -96,23 +77,15 @@
             </div>
             <div>
                 <label for="english_name" style="display: block; margin-bottom: 5px; font-weight: bold;">英文名</label>
-                <div class="suggestions-container">
-                    <input type="text" id="english_name" name="english_name" placeholder="输入英文名..." 
-                           value="{{ request.args.get('english_name', '') }}"
-                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
-                           autocomplete="off">
-                    <div class="suggestions-list" id="english_name_suggestions"></div>
-                </div>
+                <input type="text" id="english_name" name="english_name" placeholder="输入英文名..." 
+                       value="{{ request.args.get('english_name', '') }}"
+                       style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
             </div>
             <div>
                 <label for="chinese_name" style="display: block; margin-bottom: 5px; font-weight: bold;">中文名</label>
-                <div class="suggestions-container">
-                    <input type="text" id="chinese_name" name="chinese_name" placeholder="输入中文名..." 
-                           value="{{ request.args.get('chinese_name', '') }}"
-                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
-                           autocomplete="off">
-                    <div class="suggestions-list" id="chinese_name_suggestions"></div>
-                </div>
+                <input type="text" id="chinese_name" name="chinese_name" placeholder="输入中文名..." 
+                       value="{{ request.args.get('chinese_name', '') }}"
+                       style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
             </div>
             <div>
                 <label for="year" style="display: block; margin-bottom: 5px; font-weight: bold;">年份</label>
@@ -120,16 +93,12 @@
                        value="{{ request.args.get('year', '') }}"
                        style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
             </div>
-            <!-- <div>
+            <div>
                 <label for="bio" style="display: block; margin-bottom: 5px; font-weight: bold;">简介</label>
-                <div class="suggestions-container">
-                    <input type="text" id="bio" name="bio" placeholder="输入简介关键词..." 
-                           value="{{ request.args.get('bio', '') }}"
-                           style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;"
-                           autocomplete="off">
-                    <div class="suggestions-list" id="bio_suggestions"></div>
-                </div>
-            </div> -->
+                <input type="text" id="bio" name="bio" placeholder="输入简介关键词..." 
+                       value="{{ request.args.get('bio', '') }}"
+                       style="padding: 8px; width: 100%; border: 1px solid #ddd; border-radius: 4px;">
+            </div>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; gap: 15px; align-items: center;">
@@ -163,22 +132,21 @@
     <table>
         <thead>
             <tr>
-                <th style="width: 5%">序号</th>
-                <th style="width: 15%">
+                <th>序号</th>
+                <th>
                     <a href="?sort_type=english_name{% if current_sort == 'english_name_asc' %}_desc{% else %}_asc{% endif %}" 
                        style="text-decoration: none; color: inherit;">
                         英文名 {% if current_sort == 'english_name_asc' %}↑{% elif current_sort == 'english_name_desc' %}↓{% endif %}
                     </a>
                 </th>
-                <th style="width: 15%">中文名</th>
-                <th style="width: 8%">
+                <th>中文名</th>
+                <th>
                     <a href="?sort_type=year{% if current_sort == 'year_asc' %}_desc{% else %}_asc{% endif %}" 
                        style="text-decoration: none; color: inherit;">
                         年份 {% if current_sort == 'year_asc' %}↑{% elif current_sort == 'year_desc' %}↓{% endif %}
                     </a>
                 </th>
-                <th style="width: 10%">译文</th>
-                <th style="width: 47%">标题</th>
+                <th>简介</th>
             </tr>
         </thead>
         <tbody>
@@ -188,14 +156,6 @@
                 <td>{{ speaker.english_name }}</td>
                 <td>{{ speaker.chinese_name }}</td>
                 <td>{{ speaker.year }}</td>
-              
-                <td>
-                    {% if speaker.transform_status == 2 %}
-                    <span class="badge bg-success translation-status-badge">有译文</span>
-                    {% else %}
-                    <span class="badge bg-secondary translation-status-badge">无译文</span>
-                    {% endif %}
-                </td>
                 <td>
                     <a href="/talk_detail/{{ speaker.id }}" class="pdf-link" target="_blank">{{ speaker.bio }}</a>
                 </td>
@@ -257,28 +217,9 @@
     <!-- 引入jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    // 检查jQuery是否加载
-    if (typeof jQuery == 'undefined') {
-        console.error('jQuery未加载');
-    } else {
-        console.log('jQuery版本:', jQuery.fn.jquery);
-    }
     $(document).ready(function() {
-        // 初始化所有输入框的建议功能
-        const inputFields = {
-            search_term: $('#search_term'),
-            english_name: $('#english_name'),
-            chinese_name: $('#chinese_name'),
-            bio: $('#bio')
-        };
-        
-        const suggestionsLists = {
-            search_term: $('#suggestions'),
-            english_name: $('#english_name_suggestions'),
-            chinese_name: $('#chinese_name_suggestions'),
-            bio: $('#bio_suggestions')
-        };
-        
+        const searchInput = $('#search_term');
+        const suggestionsList = $('#suggestions');
         let currentFocus = -1;
         
         // 防抖函数
@@ -290,134 +231,81 @@
             };
         }
 
-        // 为所有输入框绑定输入事件
-        Object.keys(inputFields).forEach(fieldId => {
-            const input = inputFields[fieldId];
-            const suggestionsList = suggestionsLists[fieldId];
-            
-            input.on('input', debounce(function() {
-                console.log('Input event triggered for', fieldId);
-                const query = $(this).val().trim();
-                console.log('Query:', query);
-                if (query.length < 2) {
-                    suggestionsList.hide();
-                    return;
-                }
+        // 输入时获取分词建议
+        searchInput.on('input', debounce(function() {
+            const query = $(this).val().trim();
+            if (query.length < 2) {
+                suggestionsList.hide();
+                return;
+            }
 
-                // 显示加载状态
-                suggestionsList.html('<div class="loading">搜索中...</div>').show();
+            // 显示加载状态
+            suggestionsList.html('<div class="loading">搜索中...</div>').show();
 
-                // 通过Nginx代理调用Elasticsearch
-                $.ajax({
-                    url: '/es/ted_talks/_search',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        query: {
-                                bool: {
-                                    should: fieldId === 'english_name' ? 
-                                        [{
-                                            match: {
-                                                "metadata.english_name": {
-                                                    query: query,
-                                                    boost: 3.0,
-                                                    fuzziness: "AUTO",
-                                                }
-                                            }
-                                        }] :
-                                        fieldId === 'chinese_name' ? 
-                                        [{
-                                            match: {
-                                                "metadata.chinese_name": {
-                                                    query: query,
-                                                    "metadata.content": {
-                                                        query: query,
-                                                        boost: 3.5,
-                                                        fuzziness: "AUTO",
-                                                        }
-                                                }
-                                            },
-                                            {
-                                                match: {
-                                                    "metadata.english_name": {
-                                                        query: query,
-                                                        boost: 2.0,
-                                                        fuzziness: "AUTO",
-                                                        }
-                                                }
-                                            },
-                                            {
-                                                match: {
-                                                    "metadata.chinese_name": {
-                                                        query: query,
-                                                        boost: 1.8,
-                                                        fuzziness: "AUTO",
-                                                        }
-                                                }
-                                            }
-                                        ]
-                            }
-                        },
-                        size: 10
-                    }),
-                    success: function(data) {
-                        console.log('AJAX success for', fieldId, data);
-                        suggestionsList.empty();
+            // 通过Nginx代理调用Elasticsearch (确保Nginx配置了location /es/代理到9200端口)
+            $.ajax({
+                url: '/es/ted_talks/_search',  // 这个URL会被Nginx代理到localhost:9200
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    query: {
+                        multi_match: {
+                            query: query,
+                            fields: [
+                                "metadata.content^3.5",
+                                "metadata.english_name^2.0",
+                                "metadata.chinese_name^1.8"
+                            ],
+                            fuzziness: "AUTO",
+                            operator: "or",
+                            analyzer: "english",
+                            auto_generate_synonyms_phrase_query: true,
+                            lenient: true
+                        }
+                    },
+                    size: 10
+                }),
+                success: function(data) {
+                    suggestionsList.empty();
+                    
+                    if (data?.hits?.hits?.length > 0) {
+                        // 按score排序并提取建议词
+                        const suggestions = data.hits.hits
+                            .sort((a, b) => b._score - a._score)
+                            .map(hit => {
+                                const source = hit._source;
+                                return source.metadata?.content || 
+                                       source.metadata?.english_name || 
+                                       source.metadata?.chinese_name || '';
+                            })
+                            .filter(term => term)
+                            .slice(0, 10);
                         
-                        if (data?.hits?.hits?.length > 0) {
-                            // 按score排序并提取建议词
-                            const suggestions = data.hits.hits
-                                .sort((a, b) => b._score - a._score)
-                                .map(hit => {
-                                    const source = hit._source;
-                                    if (fieldId === 'chinese_name') {
-                                        return source.metadata?.chinese_name || '';
-                                    } else if (fieldId === 'english_name') {
-                                        return source.metadata?.english_name || '';
-                                    }
-                                    return source.metadata?.content || 
-                                           source.metadata?.english_name || 
-                                           source.metadata?.chinese_name || '';
-                                })
-                                .filter(term => term)
-                                .slice(0, 10);
-                            
-                            if (suggestions.length > 0) {
-                                suggestions.forEach((term, index) => {
-                                    const hit = data.hits.hits[index];
-                                    const speakerId = hit._source?.metadata?.id || hit._source?.id || hit._id;
-                                    console.log('Speaker ID:', speakerId, 'for term:', term, 'Full hit:', hit);
-                                    const item = $('<div class="suggestion-item"></div>')
+                        if (suggestions.length > 0) {
+                            suggestions.forEach(term => {
+                                suggestionsList.append(
+                                    $('<div class="suggestion-item"></div>')
                                         .text(term)
                                         .on('click', function() {
-                                            console.log('Clicked on suggestion:', term, 'from field:', fieldId);
-                                            input.val(term);
+                                            searchInput.val(term);
                                             suggestionsList.hide();
-                                            input.focus();
-                                        });
-                                    suggestionsList.append(item);
-                                });
-                            } else {
-                                suggestionsList.append('<div class="no-results">无匹配结果</div>');
-                            }
+                                            searchInput.focus();
+                                        })
+                                );
+                            });
                         } else {
                             suggestionsList.append('<div class="no-results">无匹配结果</div>');
                         }
-                    },
-                    error: function(xhr) {
-                    console.error(fieldId + '搜索建议请求失败:', xhr.status, xhr.responseText);
-                    let errorMsg = '搜索服务暂时不可用';
-                    try {
-                        const errData = JSON.parse(xhr.responseText);
-                        if (errData.error?.reason) {
-                            errorMsg = errData.error.reason;
-                        }
-                    } catch (e) {}
-                    suggestionsList.html(`<div class="error">${errorMsg}</div>`);
+                    } else {
+                        suggestionsList.append('<div class="no-results">无匹配结果</div>');
                     }
-                });
-            }, 300)); // 300ms防抖
-        }); // 结束forEach循环
+                },
+                error: function(xhr) {
+                    console.error('搜索建议请求失败:', xhr.status, xhr.responseText);
+                    suggestionsList.html('<div class="error">搜索服务暂时不可用</div>');
+                }
+            });
+        }, 300)); // 300ms防抖
         
         // 添加新的CSS样式
         $('head').append(`
@@ -434,23 +322,21 @@
             </style>
         `);
 
-        // 键盘导航 - 为所有输入框绑定
-        Object.keys(inputFields).forEach(fieldId => {
-            inputFields[fieldId].on('keydown', function(e) {
-                const items = suggestionsLists[fieldId].find('.suggestion-item');
-                if (e.keyCode === 40) { // 向下箭头
-                    currentFocus++;
-                    highlightItem(items, currentFocus);
-                } else if (e.keyCode === 38) { // 向上箭头
-                    currentFocus--;
-                    highlightItem(items, currentFocus);
-                } else if (e.keyCode === 13) { // 回车
-                    e.preventDefault();
-                    if (currentFocus > -1) {
-                        $(items[currentFocus]).click();
-                    }
+        // 键盘导航
+        searchInput.on('keydown', function(e) {
+            const items = $('.suggestion-item');
+            if (e.keyCode === 40) { // 向下箭头
+                currentFocus++;
+                highlightItem(items, currentFocus);
+            } else if (e.keyCode === 38) { // 向上箭头
+                currentFocus--;
+                highlightItem(items, currentFocus);
+            } else if (e.keyCode === 13) { // 回车
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    $(items[currentFocus]).click();
                 }
-            });
+            }
         });
         
         function highlightItem(items, index) {
@@ -474,3 +360,5 @@
         });
     });
     </script>
+</body>
+</html>

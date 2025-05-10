@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import mysql.connector
 import subprocess
 import os
@@ -128,10 +128,11 @@ def show_speakers(page=1):
                 chinese_name, 
                 bio, 
                 year, 
+                transform_status,
                 GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
             FROM speakers
             {where_clause}
-            GROUP BY english_name, chinese_name, bio, year
+            GROUP BY english_name, chinese_name, bio, year,transform_status
             HAVING COUNT(DISTINCT pdf_url) > 0
             ORDER BY {sort_field} {sort_direction}
     """
@@ -144,10 +145,11 @@ def show_speakers(page=1):
                     chinese_name, 
                     bio, 
                     year, 
+                    transform_status,
                     GROUP_CONCAT(DISTINCT pdf_url ORDER BY pdf_url SEPARATOR '|') as pdf_urls
                 FROM speakers
                 {where_clause}
-                GROUP BY english_name, chinese_name, bio, year
+                GROUP BY english_name, chinese_name, bio, year,transform_status
                 HAVING COUNT(DISTINCT pdf_url) > 0
                 ORDER BY {sort_field} {sort_direction}
         """
@@ -406,6 +408,89 @@ def show_speakers(page=1):
             cursor.close()
             conn.close()
 
+@app.route('/api/suggestions')
+def get_suggestions():
+    """获取搜索建议(使用Elasticsearch多字段加权搜索)"""
+    title_query = request.args.get('title', '').strip()
+    eng_query = request.args.get('eng_name', '').strip()
+    ch_query = request.args.get('ch_name', '').strip()
+    
+    if not any([title_query, eng_query, ch_query]):
+        return jsonify({'suggestions': []})
+    
+    try:
+        es_query = {
+            "query": {
+                "bool": {
+                    "should": [
+                        {
+                            "match": {
+                                "english_content": {
+                                    "query": title_query,
+                                    "boost": 3.5,
+                                    "fuzziness": "AUTO",
+                                    "analyzer": "english",
+                                    "lenient": True
+                                }
+                            }
+                        } if title_query else None,
+                        {
+                            "match": {
+                                "metadata.english_name": {
+                                    "query": eng_query,
+                                    "boost": 2.0,
+                                    "fuzziness": 1,
+                                    "analyzer": "english",
+                                    "lenient": True
+                                }
+                            }
+                        } if eng_query else None,
+                        {
+                            "match": {
+                                "metadata.chinese_name": {
+                                    "query": ch_query,
+                                    "boost": 1.8,
+                                    "fuzziness": 1
+                                }
+                            }
+                        } if ch_query else None
+                    ],
+                    "minimum_should_match": 1
+                }
+            },
+            "size": 10,
+            "_source": ["english_content", "metadata.english_name", "metadata.chinese_name"]
+        }
+        
+        # 移除None值
+        es_query['query']['bool']['should'] = [x for x in es_query['query']['bool']['should'] if x is not None]
+        
+        resp = requests.post(
+            f"{ES_HOST}/{ES_INDEX}/_search",
+            json=es_query,
+            timeout=5
+        )
+        resp.raise_for_status()
+        
+        # 提取建议并按权重排序
+        suggestions = []
+        for hit in resp.json().get('hits', {}).get('hits', []):
+            source = hit['_source']
+            suggestions.append({
+                'term': source.get('metadata', {}).get('content', '') or 
+                       source.get('metadata', {}).get('english_name', '') or 
+                       source.get('metadata', {}).get('chinese_name', ''),
+                'score': hit['_score']
+            })
+        
+        # 按分数降序排序
+        suggestions.sort(key=lambda x: x['score'], reverse=True)
+        return jsonify({'suggestions': [{'term': s['term'], 'score': s['score']} for s in suggestions[:10]]})
+        
+    except Exception as e:
+        print(f"搜索建议查询失败: {e}")
+        return jsonify([])
+
 @app.route('/talk_detail/<int:talk_id>')
 def talk_detail(talk_id):
     if not talk_id:
@@ -434,9 +519,11 @@ def talk_detail(talk_id):
                 s.chinese_name as speaker_name_zh,
                 s.year,
                 s.pdf_url,
+                t.eng_content,
+                t.speaker_id,
                 t.speaker_name_zh as title_zh,
                 t.content as content,
-                t.core_viewpoint as content_display,
+                t.chinese_content,
                 t.page_count
             FROM speakers s
             JOIN talks t ON s.id = t.speaker_id
@@ -519,6 +606,43 @@ def talk_detail(talk_id):
         if conn and conn.is_connected():
             cursor.close()
             conn.close()
+
+@app.route('/update_chinese_content', methods=['POST'])
+def update_chinese_content():
+    """更新中文内容到数据库"""
+    try:
+        talk_id = request.form.get('talk_id')
+        chinese_content = request.form.get('chinese_content')
+        
+        if not talk_id or chinese_content is None:
+            return jsonify({'success': False, 'error': '缺少必要参数'}), 400
+        
+        conn = None
+        cursor = None
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            
+            update_query = "UPDATE talks SET chinese_content = %s WHERE speaker_id = %s"
+            cursor.execute(update_query, (chinese_content, talk_id))
+            conn.commit()
+
+            update_query = "UPDATE speakers SET transform_status = %s WHERE id = %s"
+            cursor.execute(update_query, (2, talk_id))
+            conn.commit()
+            
+            return jsonify({'success': True})
+            
+        except mysql.connector.Error as err:
+            return jsonify({'success': False, 'error': str(err)}), 500
+            
+        finally:
+            if conn and conn.is_connected():
+                cursor.close()
+                conn.close()
+                
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5050, debug=True)

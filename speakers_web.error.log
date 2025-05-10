@@ -255,3 +255,438 @@ jinja2.exceptions.UndefinedError: 'talk' is undefined
 127.0.0.1 - - [08/May/2025 20:59:33] "GET /talk_detail/3337 HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 21:00:00] "POST /update_chinese_content HTTP/1.0" 200 -
 127.0.0.1 - - [08/May/2025 21:00:13] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 21:05:18] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [08/May/2025 21:05:39] "GET /talk_detail/3467 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 19:07:32] "GET / HTTP/1.0" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web copy.py', reloading
+ * Restarting with stat
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [09/May/2025 19:10:29] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:37:24] "GET /page/2?sort_type=english_name_asc HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:37:28] "GET /page/2?sort_type=english_name_desc HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:37:31] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:37:33] "GET /talk_detail/3523 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:37:38] "GET /talk_detail/3518 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:38:25] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:38:52] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:39:20] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:39:25] "GET /talk_detail/3516 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:39:56] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:40:25] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:40:52] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:41:00] "GET /talk_detail/3500 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:43:06] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:43:14] "GET /talk_detail/3506 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:43:35] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:43:35] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:44:42] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:44:51] "GET /talk_detail/3505 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:45:11] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:46:23] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:46:44] "GET /talk_detail/3500 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:46:50] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:46:57] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:47:06] "GET /talk_detail/3470 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:47:31] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:49:05] "GET /talk_detail/3467 HTTP/1.0" 200 -
+127.0.0.1 - - [09/May/2025 20:49:24] "POST /update_chinese_content HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 20:12:07] "GET / HTTP/1.0" 200 -
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/multiprocessing/resource_tracker.py:216: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+Traceback (most recent call last):
+  File "/Users/a/Desktop/data/ted/speakers_web.py", line 21, in <module>
+    raise Exception("无法连接到Elasticsearch，请检查服务是否运行")
+Exception: 无法连接到Elasticsearch，请检查服务是否运行
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5050
+ * Running on http://192.168.3.59:5050
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [10/May/2025 21:02:34] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:02:35] "[33mGET /favicon.ico HTTP/1.0[0m" 404 -
+127.0.0.1 - - [10/May/2025 21:06:46] "GET / HTTP/1.0" 200 -
+ * Detected change in '/Users/a/Desktop/data/ted/speakers_web copy.py', reloading
+ * Restarting with stat
+/Users/a/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+ * Debugger is active!
+ * Debugger PIN: 239-020-829
+127.0.0.1 - - [10/May/2025 21:29:13] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:29:50] "GET /?search_term=&english_name=&chinese_name=&year= HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:29:58] "GET /?search_term=&english_name=&chinese_name=&year= HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:44:17] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:44:21] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:45:05] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:48:54] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:50:01] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:52:20] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:52:28] "GET /?search_term=&english_name=&chinese_name=&year= HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:58:05] "GET / HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:58:12] "GET /?search_term=&english_name=Bill&chinese_name=&year=&bio= HTTP/1.0" 200 -
+127.0.0.1 - - [10/May/2025 21:58:23] "GET /?search_term=地方全球化_全球地方化&english_name=&chinese_name=&year=&bio= HTTP/1.0" 200 -
