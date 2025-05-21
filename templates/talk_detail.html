@@ -6,7 +6,43 @@
     <title>TED演讲详情 - {{ talk.title_zh }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Summernote CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <style>
+        /* 强制Summernote编辑器内容自动换行 */
+        .note-editable, 
+        .note-editable p,
+        .note-editable div,
+        .note-editable span {
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            overflow-x: hidden !important;
+            max-width: 100% !important;
+            word-wrap: break-word !important;
+        }
+        .note-editable * {
+            max-width: 100% !important;
+            word-break: break-word !important;
+            overflow-wrap: break-word !important;
+            white-space: pre-wrap !important;
+        }
+        .note-editor.note-frame .note-editing-area .note-editable {
+            padding: 15px !important;
+            line-height: 1.6 !important;
+        }
+        .note-editor.note-frame .note-editing-area {
+            overflow: hidden !important;
+        }
+        .note-editor.note-frame {
+            width: 100% !important;
+            max-width: 100% !important;
+        }
+        .note-editor.note-frame .note-editable {
+            min-height: 300px;
+            padding: 10px !important;
+        }
+        
         :root {
             --ted-red: #E62B1E;
             --ted-dark: #1A1A1A;
@@ -140,9 +176,13 @@
                 <div class="talk-content mt-3">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4>翻译工具</h4>
+                        <a href="https://www.doubao.com/chat/" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt me-1"></i>打开豆包翻译
+                        </a>
                     </div>
-                    <iframe src="https://fanyi.baidu.com/mtpe-individual/multimodal#/" 
-                            style="width:100%; height:500px; border:none; border-radius:5px;"></iframe>
+                    <div class="alert alert-info">
+                        点击上方按钮在新窗口中使用豆包翻译服务
+                    </div>
                 </div>
 
                 <!-- 中文内容区域 -->
@@ -155,9 +195,9 @@
                     </div>
                     
                     <!-- 显示模式 -->
-                    <div id="chineseDisplay" class="mb-3">
+                    <div id="chineseDisplay" class="mb-3" style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word; max-width: 100%; white-space: normal; overflow-x: hidden;">
                         {% if talk.chinese_content %}
-                            {{ talk.chinese_content }}
+                            {{ talk.chinese_content|safe }}
                         {% else %}
                             <p class="text-muted">暂无中文内容</p>
                         {% endif %}
@@ -167,7 +207,7 @@
                     <form id="chineseContentForm" style="display: none;">
                         <input type="hidden" name="talk_id" value="{{ talk.speaker_id }}">
                         <div class="mb-3">
-                            <textarea class="form-control" name="chinese_content" rows="5" 
+                            <textarea id="summernote" class="form-control" name="chinese_content" 
                                 placeholder="请输入中文内容...">{% if talk.chinese_content %}{{ talk.chinese_content }}{% endif %}</textarea>
                         </div>
                         <div class="d-flex gap-2">
@@ -230,9 +270,72 @@
                     editBtn.addEventListener('click', function() {
                         displayDiv.style.display = 'none';
                         form.style.display = 'block';
+                        // 初始化Summernote编辑器
+                        $('#summernote').summernote({
+                            lang: 'zh-CN',
+                            height: 300,
+                            followingToolbar: false,
+                            toolbar: [
+                                ['style', ['bold', 'italic', 'underline', 'clear']],
+                                ['font', ['strikethrough', 'superscript', 'subscript']],
+                                ['fontsize', ['fontsize']],
+                                ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['height', ['height']],
+                                ['insert', ['link', 'picture', 'video']],
+                                ['view', ['fullscreen', 'codeview', 'help']]
+                            ],
+                            codemirror: {
+                                lineWrapping: true,
+                                lineNumbers: true,
+                                mode: 'text/html',
+                                htmlMode: true,
+                                theme: 'monokai',
+                                viewportMargin: Infinity
+                            },
+                            disableResizeEditor: true,
+                            callbacks: {
+                                onInit: function() {
+                                    $('.note-editable').css({
+                                        'word-break': 'break-word',
+                                        'overflow-wrap': 'break-word',
+                                        'white-space': 'pre-wrap',
+                                        'line-height': '1.6',
+                                        'max-width': '100%'
+                                    });
+                                },
+                                onPaste: function(e) {
+                                    // 处理粘贴内容，确保换行
+                                    const pastedText = (e.originalEvent || e).clipboardData.getData('text/plain');
+                                    const formattedText = pastedText.replace(/\n/g, '<br>');
+                                    setTimeout(function() {
+                                        $('.note-editable').html(formattedText);
+                                        $('.note-editable').css({
+                                            'white-space': 'pre-wrap',
+                                            'word-break': 'break-word'
+                                        });
+                                    }, 10);
+                                },
+                                onChange: function(contents) {
+                                    // 实时确保内容换行
+                                    $('.note-editable').css({
+                                        'white-space': 'pre-wrap',
+                                        'word-break': 'break-word'
+                                    });
+                                },
+                                onBlur: function() {
+                                    $('.note-editable').css({
+                                        'white-space': 'pre-wrap',
+                                        'word-break': 'break-word'
+                                    });
+                                }
+                            }
+                        });
                     });
                     
                     cancelBtn.addEventListener('click', function() {
+                        // 销毁Summernote编辑器
+                        $('#summernote').summernote('destroy');
                         form.style.display = 'none';
                         displayDiv.style.display = 'block';
                     });
@@ -241,6 +344,9 @@
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
                         const formData = new FormData(this);
+                        // 获取Summernote编辑器内容
+                        const content = $('#summernote').summernote('code');
+                        formData.set('chinese_content', content);
                         
                         fetch('/update_chinese_content', {
                             method: 'POST',
@@ -249,18 +355,22 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                displayDiv.innerHTML = form.querySelector('textarea').value || '<p class="text-muted">暂无中文内容</p>';
+                                // 销毁Summernote编辑器
+                                $('#summernote').summernote('destroy');
+                                // 显示格式化后的内容
+                                displayDiv.innerHTML = content ? DOMPurify.sanitize(content.replace(/\n/g, '<br>'), { 
+                                    ALLOWED_TAGS: ['b', 'i', 'u', 'br', 'span', 'div', 'p', 'strong', 'em', 'ul', 'ol', 'li', 'a', 'img'],
+                                    ALLOWED_ATTR: ['style', 'src', 'href', 'class'],
+                                    FORBID_ATTR: ['style', 'class']
+                                }) : '<p class="text-muted">暂无中文内容</p>';
                                 form.style.display = 'none';
                                 displayDiv.style.display = 'block';
-                                // 不显示成功提示，直接完成保存
                             } else {
                                 console.error('更新失败:', data.message || '未知错误');
-                                // 失败时也不显示弹窗，仅记录到控制台
                             }
                         })
                         .catch(error => {
                             console.error('请求失败:', error);
-                            // 不显示弹窗，仅记录到控制台
                         });
                     });
                 });
@@ -269,6 +379,13 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (required by Summernote) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <!-- DOMPurify (for HTML sanitization) -->
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.4.0/dist/purify.min.js"></script>
+    <!-- Summernote JS -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/lang/summernote-zh-CN.min.js"></script>
     <script>
     // 处理内容概要部分
     document.addEventListener('DOMContentLoaded', function() {
